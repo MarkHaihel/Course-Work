@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using PAIS.Models;
 
 namespace PAIS
 {
@@ -13,6 +14,7 @@ namespace PAIS
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IBookRepository, FakeBookRepository>();
             services.AddMvc();
         }
         
