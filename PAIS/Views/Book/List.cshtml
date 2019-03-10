@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Book>
+
+@foreach (Book b in Model)
+{
+    <div>
+        <h3>@b.Name</h3>
+        @b.Description
+        <h4>@b.Price.ToString("c")</h4>
+    </div>
+}

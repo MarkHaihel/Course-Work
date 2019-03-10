@@ -24,7 +24,9 @@ namespace PAIS
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvc(routes => {
-
+                routes.MapRoute(
+                name: "default",
+                template: "{controller=Book}/{action=List}/{id?}");
             });
         }
     }

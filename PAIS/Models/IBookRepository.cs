@@ -2,7 +2,7 @@
 
 namespace PAIS.Models
 {
-    interface IBookRepository
+    public interface IBookRepository
     {
         IQueryable<Book> Books { get; }
     }
