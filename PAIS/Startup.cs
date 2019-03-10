@@ -7,14 +7,24 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using PAIS.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace PAIS
 {
     public class Startup
     {
+        public Startup(IConfiguration configuration) =>
+            Configuration = configuration;
+
+        public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IBookRepository, FakeBookRepository>();
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration["Data:PAISBooks:ConnectionString"]));
+            services.AddTransient<IBookRepository, EFBookRepository>();
             services.AddMvc();
         }
         
@@ -28,6 +38,7 @@ namespace PAIS
                 name: "default",
                 template: "{controller=Book}/{action=List}/{id?}");
             });
+            SeedData.EnsurePopulated(app);
         }
     }
 }
