@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Book>
+﻿@model BooksListViewModel
 
-@foreach (Book b in Model)
+@foreach (Book b in Model.Books)
 {
     <div>
         <h3>@b.Name</h3>
@@ -8,3 +8,5 @@
         <h4>@b.Price.ToString("c")</h4>
     </div>
 }
+
+<div page-model="@Model.PagingInfo" page-action="List"></div>

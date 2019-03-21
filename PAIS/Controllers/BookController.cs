@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PAIS.Models;
 using System.Linq;
+using PAIS.Models.ViewModels;
 
 namespace PAIS.Controllers
 {
@@ -14,12 +15,19 @@ namespace PAIS.Controllers
             repository = repo;
         }
 
-        public ViewResult List(int bookPage = 1) =>
-            View(repository.Books
-                .OrderBy(p => p.Name)
-                .Skip((bookPage - 1) * PageSize)
-                .Take(PageSize));
-
-        public ViewResult List() => View(repository.Books);
+        public ViewResult List(int productPage = 1) =>
+            View(new BooksListViewModel
+            {
+                Books = repository.Books
+                     .OrderBy(p => p.BookID)
+                     .Skip((productPage - 1) * PageSize)
+                     .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = productPage,
+                    ItemsPerPage = PageSize,
+                    TotalItems = repository.Books.Count()
+                }
+            });
     }
 }
