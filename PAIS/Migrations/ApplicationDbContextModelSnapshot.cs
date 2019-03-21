@@ -24,11 +24,25 @@ namespace PAIS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Amount");
+
+                    b.Property<string>("Anotation");
+
+                    b.Property<string>("Author");
+
+                    b.Property<string>("Binder");
+
                     b.Property<string>("Description");
+
+                    b.Property<string>("Format");
+
+                    b.Property<string>("ISBNCode");
 
                     b.Property<string>("Name");
 
                     b.Property<decimal>("Price");
+
+                    b.Property<string>("PublicationDate");
 
                     b.HasKey("BookID");
 

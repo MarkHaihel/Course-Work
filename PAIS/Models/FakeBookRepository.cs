@@ -7,9 +7,9 @@ namespace PAIS.Models
     {
         public IQueryable<Book> Books => new List<Book>
         {
-            new Book { Name = "Football", Price = 25 },
-            new Book { Name = "Surf board", Price = 179 },
-            new Book { Name = "Running shoes", Price = 95 }
+            new Book { Name = "ЕНЦИКЛОПЕДІЯ АФОРИЗМІВ, КРИЛАТИХ ФРАЗ, ЦИТАТ", Price = 280 },
+            new Book { Name = "ПРОШУ КОРОТКО", Price = 130 },
+            new Book { Name = "Теорія і методика журналістської творчості", Price = 70 }
         }.AsQueryable<Book>();
     }
 }

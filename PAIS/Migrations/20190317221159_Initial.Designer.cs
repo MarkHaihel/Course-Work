@@ -9,7 +9,7 @@ using PAIS.Models;
 namespace PAIS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190310152154_Initial")]
+    [Migration("20190317221159_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,11 +26,25 @@ namespace PAIS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Amount");
+
+                    b.Property<string>("Anotation");
+
+                    b.Property<string>("Author");
+
+                    b.Property<string>("Binder");
+
                     b.Property<string>("Description");
+
+                    b.Property<string>("Format");
+
+                    b.Property<string>("ISBNCode");
 
                     b.Property<string>("Name");
 
                     b.Property<decimal>("Price");
+
+                    b.Property<string>("PublicationDate");
 
                     b.HasKey("BookID");
 

@@ -17,57 +17,57 @@ namespace PAIS.Models
                 context.Books.AddRange(
                 new Book
                 {
-                    Name = "Kayak",
-                    Description = "A boat for one person",
-                    Price = 275
+                    Name = "ЕНЦИКЛОПЕДІЯ АФОРИЗМІВ, КРИЛАТИХ ФРАЗ, ЦИТАТ",
+                    Description = "«Журналiстика – це творчість і ремесло»",
+                    Price = 280
                 },
                 new Book
                 {
-                    Name = "Lifejacket",
-                    Description = "Protective and fashionable",
-                    Price = 48.95m
+                    Name = "ПРОШУ КОРОТКО",
+                    Description = "Розмова з Карелом Гвіждялою, примітки, документи",
+                    Price = 130
                 },
                 new Book
                 {
-                    Name = "Soccer Ball",
-                    Description = "FIFA-approved size and weight",
-                    Price = 19.50m
+                    Name = "Теорія і методика журналістської творчості",
+                    Description = "",
+                    Price = 70
                 },
                 new Book
                 {
-                    Name = "Corner Flags",
-                    Description = "Give your playing field a professional touch",
-                    Price = 34.95m
+                    Name = "Телевізійна журналістика",
+                    Description = "",
+                    Price = 40
                 },
                 new Book
                 {
-                    Name = "Stadium",
-                    Description = "Flat-packed 35,000-seat stadium",
-                    Price = 79500
+                    Name = "Редагування в засобах масової інформації",
+                    Description = "",
+                    Price = 70
                 },
                 new Book
                 {
-                    Name = "Thinking Cap",
-                    Description = "Improve brain efficiency by 75%",
-                    Price = 16
+                    Name = "Сучасний англомовний світ і збагачення словникового складу",
+                    Description = "",
+                    Price = 50
                 },
                 new Book
                 {
-                    Name = "Unsteady Chair",
-                    Description = "Secretly give your opponent a disadvantage",
-                    Price = 29.95m
+                    Name = "Скоропадський, Маннергейм, Врангель: кавалеристи-державники",
+                    Description = "",
+                    Price = 40
                 },
                 new Book
                 {
-                    Name = "Human Chess Board",
-                    Description = "A fun game for the family",
-                    Price = 75
+                    Name = "Міфи Другої світової війни",
+                    Description = "",
+                    Price = 30
                 },
                 new Book
                 {
-                    Name = "Bling-Bling King",
-                    Description = "Gold-plated, diamond-studded King",
-                    Price = 1200
+                    Name = "Велика Британія: географія, історія, культура",
+                    Description = "",
+                    Price = 90
                 }
                 );
                 context.SaveChanges();

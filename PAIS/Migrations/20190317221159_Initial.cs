@@ -14,8 +14,15 @@ namespace PAIS.Migrations
                     BookID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(nullable: false),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    Author = table.Column<string>(nullable: true),
+                    Format = table.Column<string>(nullable: true),
+                    PublicationDate = table.Column<string>(nullable: true),
+                    Binder = table.Column<string>(nullable: true),
+                    Amount = table.Column<int>(nullable: false),
+                    Anotation = table.Column<string>(nullable: true),
+                    ISBNCode = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
