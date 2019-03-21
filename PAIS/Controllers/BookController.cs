@@ -15,16 +15,16 @@ namespace PAIS.Controllers
             repository = repo;
         }
 
-        public ViewResult List(int productPage = 1) =>
+        public ViewResult List(int bookPage = 1) =>
             View(new BooksListViewModel
             {
                 Books = repository.Books
                      .OrderBy(p => p.BookID)
-                     .Skip((productPage - 1) * PageSize)
+                     .Skip((bookPage - 1) * PageSize)
                      .Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
-                    CurrentPage = productPage,
+                    CurrentPage = bookPage,
                     ItemsPerPage = PageSize,
                     TotalItems = repository.Books.Count()
                 }
