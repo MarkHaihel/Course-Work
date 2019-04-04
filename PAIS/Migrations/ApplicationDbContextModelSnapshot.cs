@@ -44,6 +44,8 @@ namespace PAIS.Migrations
 
                     b.Property<string>("PublicationDate");
 
+                    b.Property<string>("PublicationType");
+
                     b.HasKey("BookID");
 
                     b.ToTable("Books");

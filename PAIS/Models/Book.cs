@@ -8,6 +8,7 @@
         public string Author { get; set; }
         public string Format { get; set; }
         public string PublicationDate { get; set; }
+        public string PublicationType { get; set; }
         public string Binder { get; set; }
         public int Amount { get; set; }
         public string Anotation { get; set; }

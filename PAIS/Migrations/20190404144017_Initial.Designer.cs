@@ -9,7 +9,7 @@ using PAIS.Models;
 namespace PAIS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190317221159_Initial")]
+    [Migration("20190404144017_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,8 @@ namespace PAIS.Migrations
                     b.Property<decimal>("Price");
 
                     b.Property<string>("PublicationDate");
+
+                    b.Property<string>("PublicationType");
 
                     b.HasKey("BookID");
 

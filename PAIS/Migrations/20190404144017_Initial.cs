@@ -18,6 +18,7 @@ namespace PAIS.Migrations
                     Author = table.Column<string>(nullable: true),
                     Format = table.Column<string>(nullable: true),
                     PublicationDate = table.Column<string>(nullable: true),
+                    PublicationType = table.Column<string>(nullable: true),
                     Binder = table.Column<string>(nullable: true),
                     Amount = table.Column<int>(nullable: false),
                     Anotation = table.Column<string>(nullable: true),

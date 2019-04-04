@@ -15,19 +15,24 @@ namespace PAIS.Controllers
             repository = repo;
         }
 
-        public ViewResult List(int bookPage = 1) =>
+        public ViewResult List(string type, int bookPage = 1) =>
             View(new BooksListViewModel
             {
                 Books = repository.Books
-                     .OrderBy(p => p.BookID)
+                     .OrderBy(b => b.BookID)
+                     .Where(b => type == null || b.PublicationType == type)
                      .Skip((bookPage - 1) * PageSize)
                      .Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = bookPage,
                     ItemsPerPage = PageSize,
-                    TotalItems = repository.Books.Count()
-                }
+                    TotalItems = type == null ?
+                        repository.Books.Count() :
+                        repository.Books.Where(e =>
+                        e.PublicationType == type).Count()
+                },
+                CurrentType = type
             });
     }
 }
