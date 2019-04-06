@@ -26,6 +26,8 @@ namespace PAIS
                     Configuration["Data:PAISBooks:ConnectionString"]));
             services.AddTransient<IBookRepository, EFBookRepository>();
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -33,6 +35,7 @@ namespace PAIS
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvc(routes => {
                 routes.MapRoute(
                         name: null,
