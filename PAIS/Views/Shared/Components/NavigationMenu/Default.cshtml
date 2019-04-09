@@ -2,19 +2,19 @@
 
 <a class="btn btn-block btn-secondary"
    asp-action="List"
-   asp-controller="Product"
+   asp-controller="Book"
    asp-route-category="">
     Home
 </a>
 
-@foreach (string category in Model)
+@foreach (string type in Model)
 {
     <a class="btn btn-block
-     @(category == ViewBag.SelectedType ? "btn-primary": "btn-secondary")"
+     @(type == ViewBag.SelectedType ? "btn-primary": "btn-secondary")"
        asp-action="List"
-       asp-controller="Product"
-       asp-route-category="@category"
+       asp-controller="Book"
+       asp-route-type="@type"
        asp-route-productPage="1">
-        @category
+        @type
     </a>
 }

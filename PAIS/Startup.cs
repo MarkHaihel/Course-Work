@@ -25,6 +25,9 @@ namespace PAIS
                 options.UseSqlServer(
                     Configuration["Data:PAISBooks:ConnectionString"]));
             services.AddTransient<IBookRepository, EFBookRepository>();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
