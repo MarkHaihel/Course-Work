@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace PAIS.Models
 {
-    public class FakeBookRepository : IBookRepository
+    public class FakeBookRepository /* : IBookRepository */
     {
         public IQueryable<Book> Books => new List<Book>
         {

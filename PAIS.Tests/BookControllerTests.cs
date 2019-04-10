@@ -97,7 +97,7 @@ namespace PAIS.Tests
         }
 
         [Fact]
-        public void Generate_Category_Specific_Product_Count()
+        public void Generate_Category_Specific_Book_Count()
         {
             // Arrange
             Mock<IBookRepository> mock = new Mock<IBookRepository>();

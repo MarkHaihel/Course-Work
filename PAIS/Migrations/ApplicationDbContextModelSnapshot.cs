@@ -97,6 +97,8 @@ namespace PAIS.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.Property<bool>("Shipped");
+
                     b.Property<string>("State")
                         .IsRequired();
 
