@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PAIS.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PAIS.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IBookRepository repository;
