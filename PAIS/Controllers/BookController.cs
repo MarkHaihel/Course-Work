@@ -34,5 +34,7 @@ namespace PAIS.Controllers
                 },
                 CurrentType = type
             });
+        public ViewResult Details(int bookId) =>
+            View(repository.GetBook(bookId));
     }
 }

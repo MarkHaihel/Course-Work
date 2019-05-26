@@ -23,13 +23,20 @@ namespace PAIS.Models
             else
             {
                 Book dbEntry = context.Books
-                .FirstOrDefault(p => p.BookID == book.BookID);
+                    .FirstOrDefault(p => p.BookID == book.BookID);
                 if (dbEntry != null)
                 {
                     dbEntry.Name = book.Name;
                     dbEntry.Description = book.Description;
-                    dbEntry.Price = book.Price;
+                    dbEntry.Author = book.Author;
+                    dbEntry.Format = book.Format;
+                    dbEntry.PublicationDate = book.PublicationDate;
                     dbEntry.PublicationType = book.PublicationType;
+                    dbEntry.Binder = book.Binder;
+                    dbEntry.Amount = book.Amount;
+                    dbEntry.Anotation = book.Anotation;
+                    dbEntry.ISBNCode = book.ISBNCode;
+                    dbEntry.Price = book.Price;
                 }
             }
             context.SaveChanges();
@@ -47,6 +54,14 @@ namespace PAIS.Models
             }
             
             return dbEntry;
+        }
+
+        public Book GetBook(int bookID)
+        {
+            return Books
+                .Where(n => n.BookID == bookID)
+                .OrderBy(n => n.BookID)
+                .First();
         }
     }
 }

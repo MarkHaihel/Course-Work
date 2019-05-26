@@ -10,9 +10,15 @@
     <title>PAIS</title>
 </head>
 <body>
-    <div class="navbar navbar-inverse bg-inverse" role="navigation">
+    <div class="navbar" role="navigation">
         <div class="row">
-            <a class="col navbar-brand" href="#">PAIS</a>
+            <a class="col navbar-brand" asp-action="List" asp-controller="Book">PAIS</a>
+            <a class="nav"
+               asp-action="List"
+               asp-controller="Book"
+               asp-route-type="">
+                Home
+            </a>
             <div class="col-4 text-right">
                 @await Component.InvokeAsync("CartSummary")
             </div>

@@ -9,5 +9,7 @@ namespace PAIS.Models
         void SaveBook(Book book);
 
         Book DeleteBook(int bookID);
+
+        Book GetBook(int bookID);
     }
 }

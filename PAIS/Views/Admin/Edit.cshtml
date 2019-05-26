@@ -5,30 +5,65 @@
     Layout = "_AdminLayout";
 }
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="BookID" />
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <div><span asp-validation-for="Name" class="text-danger"></span></div>
-        <input asp-for="Name" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <div><span asp-validation-for="Description" class="text-danger"></span></div>
-        <textarea asp-for="Description" class="form-control"></textarea>
-    </div>
-    <div class="form-group">
-        <label asp-for="PublicationType"></label>
-        <div><span asp-validation-for="PublicationType" class="text-danger"></span></div>
-        <input asp-for="PublicationType" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Price"></label>
-        <div><span asp-validation-for="Price" class="text-danger"></span></div>
-        <input asp-for="Price" class="form-control" />
-    </div>
-    <div class="text-center">
-        <button class="btn btn-primary" type="submit">Save</button>
-        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-    </div>
-</form>
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="BookID" />
+        <div class="form-group">
+            <label asp-for="Name">Назва книги</label>
+            <div><span asp-validation-for="Name" class="text-danger"></span></div>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">Опис</label>
+            <div><span asp-validation-for="Description" class="text-danger"></span></div>
+            <textarea asp-for="Description" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="Author">Автор</label>
+            <div><span asp-validation-for="Author" class="text-danger"></span></div>
+            <textarea asp-for="Author" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="Format">Формат</label>
+            <div><span asp-validation-for="Format" class="text-danger"></span></div>
+            <textarea asp-for="Format" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="PublicationDate">Дата публікації</label>
+            <div><span asp-validation-for="PublicationDate" class="text-danger"></span></div>
+            <input asp-for="PublicationDate" type="month" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="PublicationType">Тип публікації</label>
+            <div><span asp-validation-for="PublicationType" class="text-danger"></span></div>
+            <input asp-for="PublicationType" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Binder">Палітурка</label>
+            <div><span asp-validation-for="Binder" class="text-danger"></span></div>
+            <input asp-for="Binder" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Amount">Обсяг</label>
+            <div><span asp-validation-for="Amount" class="text-danger"></span></div>
+            <input asp-for="Amount" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Anotation">Анотація</label>
+            <div><span asp-validation-for="Anotation" class="text-danger"></span></div>
+            <input asp-for="Anotation" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="ISBNCode"></label>
+            <div><span asp-validation-for="ISBNCode" class="text-danger"></span></div>
+            <input asp-for="ISBNCode" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Price">Ціна</label>
+            <div><span asp-validation-for="Price" class="text-danger"></span></div>
+            <input asp-for="Price" class="form-control" />
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Save</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
