@@ -3,33 +3,83 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet"
-          asp-href-include="/lib/bootstrap/dist/**/*.min.css"
-          asp-href-exclude="**/*-reboot*,**/*-grid*" />
-    <link rel="stylesheet" asp-href-include="/lib/fontawesome/css/*.css" />
-    <title>PAIS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.min.css">
+    <script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <style>
+        .input-validation-error {
+            border-color: red;
+            background-color: #fee;
+        }
+    </style>
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <title>@ViewBag.Title</title>
 </head>
 <body>
-    <div class="navbar" role="navigation">
-        <div class="row">
-            <a class="col navbar-brand" asp-action="List" asp-controller="Book">PAIS</a>
-            <a class="nav"
-               asp-action="List"
-               asp-controller="Book"
-               asp-route-type="">
-                Home
-            </a>
-            <div class="col-4 text-right">
-                @await Component.InvokeAsync("CartSummary")
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <div class="container">
+            <a class="navbar-brand" asp-action="List" asp-controller="Book">PAIS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar1">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-action="List" asp-controller="Book">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="m-1">
+                    @await Component.InvokeAsync("CartSummary")
+                </div>
+                <form class="form-inline my-2 my-lg-0" style="margin-right:4px; margin-left:4px;">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Пошук" aria-label="Search">
+                    <button class="btn btn-light my-2 my-sm-0"  type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                <a class="btn btn-outline-success m-1"
+                   asp-action="Registr" asp-controller="Account">
+                    Реєстрація
+                </a>
+                }
+                <a asp-action="Index" asp-controller="Admin">
+                    <span class="btn btn-outline-warning btn-dark m-1">@(User.Identity.IsAuthenticated ? User.Identity.Name : "Вхід")</span>
+                </a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="btn-outline-danger btn btn-dark m-1"
+                       asp-action="Logout" asp-controller="Account">
+                        Вийти
+                    </a>
+                }
             </div>
         </div>
+    </nav>
+    <div class="container" style="margin-top: 20px; margin-bottom:50px;">
+        @RenderBody()
     </div>
-    <div class="row m-1 p-1">
-        <div id="categories" class="col-3">
-            @await Component.InvokeAsync("NavigationMenu")
-        </div>
-        <div class="col-9">
-            @RenderBody()
+    <div class="navbar navbar-dark bg-dark" style="position:fixed; height:40px; bottom:0px; right: 0px; left:0px;">
+        <div class="container text-white">
+            <div>
+                © 2019 Copyright:
+                <a href="#" style="color: lightgrey;"> Somesite.com</a>
+            </div>
         </div>
     </div>
 </body>

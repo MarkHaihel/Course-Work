@@ -1,5 +1,10 @@
 ﻿@model Book
 
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "_Layout";
+}s
+
 <div class="card card-outline-primary m-1 p-1">
     <div class="bg-faded p-1">
         <h4>
@@ -10,12 +15,14 @@
         </h4>
     </div>
     <div class="card-text p-1"><h5>@Model.Description</h5></div>
-    <p>Автор: @Model.Author<br />
-    Формат: @Model.Format<br />
-    Дата публікації: @Model.PublicationDate<br />
-    Тип публікації: @Model.PublicationType<br />
-    Палітурка: @Model.Binder<br />
-    Обсяг: @Model.Amount с.</p>
+    <p>
+        Автор: @Model.Author<br />
+        Формат: @Model.Format<br />
+        Дата публікації: @Model.PublicationDate<br />
+        Тип публікації: @Model.PublicationType<br />
+        Палітурка: @Model.Binder<br />
+        Обсяг: @Model.Amount с.
+    </p>
     <p>Анотація: @Model.Anotation</p>
     <p>ISBNCode: @Model.ISBNCode</p>
     <form id="@Model.BookID" asp-action="AddToCart"

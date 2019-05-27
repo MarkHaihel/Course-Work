@@ -1,8 +1,8 @@
 ﻿@model Book
 
 @{
-    ViewBag.Title = "Edit Book";
-    Layout = "_AdminLayout";
+    ViewBag.Title = "Редагування книги";
+    Layout = "_Layout";
 }
 
     <form asp-action="Edit" method="post">
@@ -63,7 +63,7 @@
             <input asp-for="Price" class="form-control" />
         </div>
         <div class="text-center">
-            <button class="btn btn-primary" type="submit">Save</button>
-            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            <button class="btn btn-primary" type="submit">Зберегти</button>
+            <a asp-action="Index" class="btn btn-secondary">Відмінити</a>
         </div>
     </form>
