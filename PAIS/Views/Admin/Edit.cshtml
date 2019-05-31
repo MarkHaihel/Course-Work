@@ -1,11 +1,16 @@
 ﻿@model Book
 
 @{
-    ViewBag.Title = "Редагування книги";
     Layout = "_Layout";
 }
 
-    <form asp-action="Edit" method="post">
+    <h2>
+        Редагування книги
+    </h2>
+
+<hr />
+
+    <form asp-action="Edit" style="padding:0px;" method="post" class="col-md-6 col-sm-12">
         <input type="hidden" asp-for="BookID" />
         <div class="form-group">
             <label asp-for="Name">Назва книги</label>
@@ -62,8 +67,9 @@
             <div><span asp-validation-for="Price" class="text-danger"></span></div>
             <input asp-for="Price" class="form-control" />
         </div>
-        <div class="text-center">
-            <button class="btn btn-primary" type="submit">Зберегти</button>
-            <a asp-action="Index" class="btn btn-secondary">Відмінити</a>
+        <div>
+            <button class="btn btn-outline-dark" type="submit">Зберегти</button>
+            <a asp-action="Index" class="btn btn-link">Назад</a>
         </div>
     </form>
+<hr />

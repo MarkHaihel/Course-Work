@@ -8,7 +8,7 @@ namespace PAIS.Controllers
     public class BookController : Controller
     {
         private IBookRepository repository;
-        public int PageSize = 4;
+        public int PageSize = 6;
 
         public BookController(IBookRepository repo)
         {

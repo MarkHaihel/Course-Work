@@ -5,16 +5,13 @@
     Layout = "_Layout";
 }
 <div class="row">
-    <div id="categories" class="col-md-3 col-sm-12">
-        @await Component.InvokeAsync("NavigationMenu")
-    </div>
 
-    <div class="col-md-9 col-sm-12">
-        @foreach (Book b in Model.Books)
-        {
+    @foreach (Book b in Model.Books)
+    {
+        <div class="col-sm-12 col-md-4">
             @await Html.PartialAsync("BookSummary", b)
-        }
-    </div>
+        </div>
+    }
 </div>
 
 <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
