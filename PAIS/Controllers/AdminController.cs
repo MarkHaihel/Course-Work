@@ -20,9 +20,27 @@ namespace PAIS.Controllers
 
         public ViewResult Index() => View(repository.Books);
 
-        public ViewResult Edit(int bookId) =>
-            View(repository.Books
-                .FirstOrDefault(b => b.BookID == bookId));
+        public ViewResult Edit(int bookId)
+        {
+            Book model = repository.Books
+                   .FirstOrDefault(b => b.BookID == bookId);
+
+            return View(new BookViewModel
+            {
+                BookID = model.BookID,
+                Name = model.Name,
+                Description = model.Description,
+                Author = model.Author,
+                Format = model.Format,
+                PublicationDate = model.PublicationDate,
+                PublicationType = model.PublicationType,
+                Binder = model.Binder,
+                Amount = model.Amount,
+                Anotation = model.Anotation,
+                ISBNCode = model.ISBNCode,
+                Price = model.Price
+            });
+        }
 
         [HttpPost]
         public IActionResult Edit(BookViewModel model)
@@ -31,6 +49,7 @@ namespace PAIS.Controllers
             {
                 Book newBook = new Book
                 {
+                    BookID = model.BookID,
                     Name = model.Name,
                     Description = model.Description,
                     Author = model.Author,
