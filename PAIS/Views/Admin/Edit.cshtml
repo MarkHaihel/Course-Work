@@ -1,4 +1,4 @@
-﻿@model Book
+﻿@model BookViewModel
 
 @{
     Layout = "_Layout";
@@ -17,25 +17,30 @@
             <div><span asp-validation-for="Name" class="text-danger"></span></div>
             <input asp-for="Name" class="form-control" />
         </div>
+        @*<div>
+            <label asp-for="Image">Зображення</label>
+            <div><span asp-validation-for="Image" class="text-danger"></span></div>
+            <input asp-for="Image" type="file" class="form-control-file border"/>
+        </div>*@
         <div class="form-group">
             <label asp-for="Description">Опис</label>
             <div><span asp-validation-for="Description" class="text-danger"></span></div>
-            <textarea asp-for="Description" class="form-control"></textarea>
+            <input asp-for="Description" class="form-control"/>
         </div>
         <div class="form-group">
             <label asp-for="Author">Автор</label>
             <div><span asp-validation-for="Author" class="text-danger"></span></div>
-            <textarea asp-for="Author" class="form-control"></textarea>
+            <input asp-for="Author" class="form-control"/>
         </div>
         <div class="form-group">
             <label asp-for="Format">Формат</label>
             <div><span asp-validation-for="Format" class="text-danger"></span></div>
-            <textarea asp-for="Format" class="form-control"></textarea>
+            <input asp-for="Format" class="form-control"/>
         </div>
         <div class="form-group">
             <label asp-for="PublicationDate">Дата публікації</label>
             <div><span asp-validation-for="PublicationDate" class="text-danger"></span></div>
-            <input asp-for="PublicationDate" type="month" class="form-control" />
+            <input asp-for="PublicationDate" type="number" class="form-control" />
         </div>
         <div class="form-group">
             <label asp-for="PublicationType">Тип публікації</label>
@@ -55,7 +60,7 @@
         <div class="form-group">
             <label asp-for="Anotation">Анотація</label>
             <div><span asp-validation-for="Anotation" class="text-danger"></span></div>
-            <input asp-for="Anotation" class="form-control" />
+            <textarea asp-for="Anotation" class="form-control"></textarea>
         </div>
         <div class="form-group">
             <label asp-for="ISBNCode"></label>

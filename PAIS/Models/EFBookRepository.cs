@@ -27,6 +27,7 @@ namespace PAIS.Models
                 if (dbEntry != null)
                 {
                     dbEntry.Name = book.Name;
+                    dbEntry.Image = book.Image;
                     dbEntry.Description = book.Description;
                     dbEntry.Author = book.Author;
                     dbEntry.Format = book.Format;
@@ -49,7 +50,12 @@ namespace PAIS.Models
 
             if (dbEntry != null)
             {
+                var comments = context.Comments.Where(c => c.BookId == bookID);
                 context.Books.Remove(dbEntry);
+                foreach (var c in comments)
+                {
+                    context.Comments.Remove(c);
+                }
                 context.SaveChanges();
             }
             

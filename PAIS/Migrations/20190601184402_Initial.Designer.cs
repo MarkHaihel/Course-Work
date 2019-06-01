@@ -10,14 +10,14 @@ using PAIS.Models;
 namespace PAIS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190409181642_Orders")]
-    partial class Orders
+    [Migration("20190601184402_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -29,25 +29,37 @@ namespace PAIS.Migrations
 
                     b.Property<int>("Amount");
 
-                    b.Property<string>("Anotation");
+                    b.Property<string>("Anotation")
+                        .IsRequired();
 
-                    b.Property<string>("Author");
+                    b.Property<string>("Author")
+                        .IsRequired();
 
-                    b.Property<string>("Binder");
+                    b.Property<string>("Binder")
+                        .IsRequired();
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
-                    b.Property<string>("Format");
+                    b.Property<string>("Format")
+                        .IsRequired();
 
-                    b.Property<string>("ISBNCode");
+                    b.Property<string>("ISBNCode")
+                        .IsRequired();
 
-                    b.Property<string>("Name");
+                    b.Property<byte[]>("Image")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<decimal>("Price");
 
-                    b.Property<string>("PublicationDate");
+                    b.Property<string>("PublicationDate")
+                        .IsRequired();
 
-                    b.Property<string>("PublicationType");
+                    b.Property<string>("PublicationType")
+                        .IsRequired();
 
                     b.HasKey("BookID");
 
@@ -75,6 +87,25 @@ namespace PAIS.Migrations
                     b.ToTable("CartLine");
                 });
 
+            modelBuilder.Entity("PAIS.Models.Comment", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookId");
+
+                    b.Property<int>("OwnerId");
+
+                    b.Property<string>("Text");
+
+                    b.Property<DateTime>("Time");
+
+                    b.HasKey("CommentId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("PAIS.Models.Order", b =>
                 {
                     b.Property<int>("OrderID")
@@ -98,6 +129,8 @@ namespace PAIS.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired();
+
+                    b.Property<bool>("Shipped");
 
                     b.Property<string>("State")
                         .IsRequired();

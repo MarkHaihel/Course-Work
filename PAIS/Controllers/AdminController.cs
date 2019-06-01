@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PAIS.Models;
+using PAIS.Models.ViewModels;
 using System.Linq;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 
 namespace PAIS.Controllers
@@ -22,22 +25,44 @@ namespace PAIS.Controllers
                 .FirstOrDefault(b => b.BookID == bookId));
 
         [HttpPost]
-        public IActionResult Edit(Book book)
+        public IActionResult Edit(BookViewModel model)
         {
             if (ModelState.IsValid)
             {
-                repository.SaveBook(book);
-                TempData["message"] = $"{book.Name} has been saved";
+                Book newBook = new Book
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    Author = model.Author,
+                    Format = model.Format,
+                    PublicationDate = model.PublicationDate,
+                    PublicationType = model.PublicationType,
+                    Binder = model.Binder,
+                    Amount = model.Amount,
+                    Anotation = model.Anotation,
+                    ISBNCode = model.ISBNCode,
+                    Price = model.Price
+                };
+                //byte[] imageData = null;
+                //using (var binaryReader = new BinaryReader(model.Image.OpenReadStream()))
+                //{
+                //    imageData = binaryReader.ReadBytes((int)model.Image.Length);
+                //}
+                //newBook.Image = imageData;
+                newBook.Image = new byte[] { 3, 10, 8, 25 };
+
+                repository.SaveBook(newBook);
+                TempData["message"] = $"{newBook.Name} has been saved";
                 return RedirectToAction("Index");
             }
             else
             {
                 // there is something wrong with the data values
-                return View(book);
+                return View(model);
             }
         }
 
-        public ViewResult Create() => View("Edit", new Book());
+        public ViewResult Create() => View("Edit", new BookViewModel());
 
         [HttpPost]
         public IActionResult Delete(int bookId)
