@@ -35,6 +35,7 @@ namespace PAIS
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IBookRepository, EFBookRepository>();
+            services.AddTransient<ICommentRepository, EFCommentRepository>();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IOrderRepository, EFOrderRepository>();

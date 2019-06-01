@@ -25,7 +25,10 @@ namespace PAIS.Tests
                 new Book {BookID = 5, Name = "B5"}
             }).AsQueryable<Book>());
 
-            BookController controller = new BookController(mock.Object);
+            Mock<ICommentRepository> mock1 = new Mock<ICommentRepository>();
+            mock1.Setup(m => m.Comments).Returns((new Comment[] { }).AsQueryable<Comment>());
+
+            BookController controller = new BookController(mock.Object, mock1.Object);
             controller.PageSize = 3;
 
             //Act
@@ -52,9 +55,13 @@ namespace PAIS.Tests
                 new Book {BookID = 5, Name = "P5"}
             }).AsQueryable<Book>());
 
+            Mock<ICommentRepository> mock1 = new Mock<ICommentRepository>();
+            mock1.Setup(m => m.Comments).Returns((new Comment[] { }).AsQueryable<Comment>());
+
+
             // Arrange
             BookController controller =
-            new BookController(mock.Object) { PageSize = 3 };
+            new BookController(mock.Object, mock1.Object) { PageSize = 3 };
 
             // Act
             BooksListViewModel result =
@@ -82,8 +89,11 @@ namespace PAIS.Tests
                 new Book {BookID = 5, Name = "B5", PublicationType = "Cat3"}
             }).AsQueryable<Book>());
 
+            Mock<ICommentRepository> mock1 = new Mock<ICommentRepository>();
+            mock1.Setup(m => m.Comments).Returns((new Comment[] { }).AsQueryable<Comment>());
+
             // Arrange - create a controller and make the page size 3 items
-            BookController controller = new BookController(mock.Object);
+            BookController controller = new BookController(mock.Object, mock1.Object);
             controller.PageSize = 3;
 
             // Action
@@ -108,7 +118,11 @@ namespace PAIS.Tests
                 new Book {BookID = 4, Name = "B4", PublicationType = "Cat2"},
                 new Book {BookID = 5, Name = "B5", PublicationType = "Cat3"}
                 }).AsQueryable<Book>());
-            BookController target = new BookController(mock.Object);
+
+            Mock<ICommentRepository> mock1 = new Mock<ICommentRepository>();
+            mock1.Setup(m => m.Comments).Returns((new Comment[] { }).AsQueryable<Comment>());
+
+            BookController target = new BookController(mock.Object, mock1.Object);
             target.PageSize = 3;
             Func<ViewResult, BooksListViewModel> GetModel = result =>
                 result?.ViewData?.Model as BooksListViewModel;

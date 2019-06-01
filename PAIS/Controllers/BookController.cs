@@ -7,34 +7,40 @@ namespace PAIS.Controllers
 {
     public class BookController : Controller
     {
-        private IBookRepository repository;
+        private IBookRepository bookRepository;
+        private ICommentRepository commentRepository;
         public int PageSize = 6;
 
-        public BookController(IBookRepository repo)
+        public BookController(IBookRepository bRepo, ICommentRepository cRepo)
         {
-            repository = repo;
+            bookRepository = bRepo;
+            commentRepository = cRepo;
         }
 
-        public ViewResult List(string type, int bookPage = 1) =>
+        public ViewResult List(string search, int bookPage = 1) =>
             View(new BooksListViewModel
             {
-                Books = repository.Books
+                Books = bookRepository.Books
                      .OrderBy(b => b.BookID)
-                     .Where(b => type == null || b.PublicationType == type)
+                     .Where(b => search == null || b.Name == search)
                      .Skip((bookPage - 1) * PageSize)
                      .Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = bookPage,
                     ItemsPerPage = PageSize,
-                    TotalItems = type == null ?
-                        repository.Books.Count() :
-                        repository.Books.Where(e =>
-                        e.PublicationType == type).Count()
+                    TotalItems = search == null ?
+                        bookRepository.Books.Count() :
+                        bookRepository.Books.Where(e =>
+                        e.PublicationType == search).Count()
                 },
-                CurrentType = type
+                Search = search
             });
         public ViewResult Details(int bookId) =>
-            View(repository.GetBook(bookId));
+            View(new BookCommentsViewModel
+            {
+                Book = bookRepository.GetBook(bookId),
+                Comments = commentRepository.Comments.Where(c => c.BookId == bookId)
+            });
     }
 }

@@ -47,16 +47,21 @@
                 <div class="m-1">
                     @await Component.InvokeAsync("CartSummary")
                 </div>
-                <form class="form-inline my-2 my-lg-0" style="margin-right:4px; margin-left:4px;">
-                    <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Пошук" aria-label="Search">
-                    <button class="btn btn-light btn-sm my-2 my-sm-0"  type="submit"><i class="fa fa-search"></i></button>
+                <form asp-controller="Book" asp-action="List" method="get" class="form-inline my-2 my-lg-0" style="margin-right:4px; margin-left:4px;">
+                    <input class="form-control form-control-sm mr-sm-2" type="text"
+                           name="search" placeholder="Пошук" aria-label="Search">
+
+                    <button class="btn btn-light btn-sm my-2 my-sm-0" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </form>
+
                 @if (!User.Identity.IsAuthenticated)
                 {
-                <a class="btn btn-outline-success m-1 btn-sm"
-                   asp-action="Registr" asp-controller="Account">
-                    Реєстрація
-                </a>
+                    <a class="btn btn-outline-success m-1 btn-sm"
+                       asp-action="Registr" asp-controller="Account">
+                        Реєстрація
+                    </a>
                 }
                 <a asp-action="Index" asp-controller="Admin">
                     <span class="btn btn-outline-warning btn-sm btn-dark m-1">@(User.Identity.IsAuthenticated ? User.Identity.Name : "Вхід")</span>

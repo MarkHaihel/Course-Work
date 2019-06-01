@@ -1,33 +1,33 @@
-﻿@model Book
+﻿@model BookCommentsViewModel
 
 @{
-    ViewBag.Title = Model.Name;
+    ViewBag.Title = Model.Book.Name;
     Layout = "_Layout";
-}s
+}
 
 <div class="card card-outline-primary m-1 p-1">
     <div class="bg-faded p-1">
         <h4>
-            @Model.Name
+            @Model.Book.Name
             <span class="badge badge-pill badge-primary" style="float:right">
-                <small>@Model.Price.ToString("c")</small>
+                <small>@Model.Book.Price.ToString("c")</small>
             </span>
         </h4>
     </div>
-    <div class="card-text p-1"><h5>@Model.Description</h5></div>
+    <div class="card-text p-1"><h5>@Model.Book.Description</h5></div>
     <p>
-        Автор: @Model.Author<br />
-        Формат: @Model.Format<br />
-        Дата публікації: @Model.PublicationDate<br />
-        Тип публікації: @Model.PublicationType<br />
-        Палітурка: @Model.Binder<br />
-        Обсяг: @Model.Amount с.
+        Автор: @Model.Book.Author<br />
+        Формат: @Model.Book.Format<br />
+        Дата публікації: @Model.Book.PublicationDate<br />
+        Тип публікації: @Model.Book.PublicationType<br />
+        Палітурка: @Model.Book.Binder<br />
+        Обсяг: @Model.Book.Amount с.
     </p>
-    <p>Анотація: @Model.Anotation</p>
-    <p>ISBNCode: @Model.ISBNCode</p>
-    <form id="@Model.BookID" asp-action="AddToCart"
+    <p>Анотація: @Model.Book.Anotation</p>
+    <p>ISBNCode: @Model.Book.ISBNCode</p>
+    <form id="@Model.Book.BookID" asp-action="AddToCart"
           asp-controller="Cart" method="post">
-        <input type="hidden" asp-for="BookID" />
+        <input type="hidden" asp-for="Book.BookID" />
         <input type="hidden" name="returnUrl"
                value="@ViewContext.HttpContext.Request.PathAndQuery()" />
         <span class="card-text p-1">
