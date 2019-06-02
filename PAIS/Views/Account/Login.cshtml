@@ -3,19 +3,32 @@
 @{
     Layout = "_Layout";
 }
+<h2 class="p-2">
+    Вхід
+</h2>
+<div class="row">
+    <div class="col-md-4">
+        <hr />
+        <p class="p-2 m-0">Уведіть свої дані для входу</p>
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <form class="p-2 " asp-action="Login" asp-controller="Account" method="post">
+            <input type="hidden" asp-for="ReturnUrl" />
+            <div class="form-group">
+                <label asp-for="Name">Логін</label>
+                <div><span asp-validation-for="Name" class="text-danger"></span></div>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Пароль</label>
+                <div><span asp-validation-for="Password" class="text-danger"></span></div>
+                <input asp-for="Password" class="form-control" />
+            </div>
+            <button class="btn btn-primary" type="submit">Вхід</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <p>
 
-<div class="text-danger" asp-validation-summary="All"></div>
-<form class="p-2" asp-action="Login" asp-controller="Account" method="post">
-    <input type="hidden" asp-for="ReturnUrl" />
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <div><span asp-validation-for="Name" class="text-danger"></span></div>
-        <input asp-for="Name" class="form-control" />
+        </p>
     </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <div><span asp-validation-for="Password" class="text-danger"></span></div>
-        <input asp-for="Password" class="form-control" />
-    </div>
-    <button class="btn btn-primary" type="submit">Log In</button>
-</form>
+</div>

@@ -6,35 +6,11 @@
 }
 
 <div class="card card-outline-primary m-1 p-1">
-    <div class="bg-faded p-1">
-        <h4>
-            @Model.Book.Name
-            <span class="badge badge-pill badge-primary" style="float:right">
-                <small>@Model.Book.Price.ToString("c")</small>
-            </span>
-        </h4>
-    </div>
-    <div class="card-text p-1"><h5>@Model.Book.Description</h5></div>
-    <p>
-        Автор: @Model.Book.Author<br />
-        Формат: @Model.Book.Format<br />
-        Дата публікації: @Model.Book.PublicationDate<br />
-        Тип публікації: @Model.Book.PublicationType<br />
-        Палітурка: @Model.Book.Binder<br />
-        Обсяг: @Model.Book.Amount с.
-    </p>
-    <p>Анотація: @Model.Book.Anotation</p>
-    <p>ISBNCode: @Model.Book.ISBNCode</p>
-    <form id="@Model.Book.BookID" asp-action="AddToCart"
-          asp-controller="Cart" method="post">
-        <input type="hidden" asp-for="Book.BookID" />
-        <input type="hidden" name="returnUrl"
-               value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-        <span class="card-text p-1">
-            <button type="submit"
-                    class="btn btn-success btn-sm pull-right" style="float:right">
-                Add To Cart
-            </button>
-        </span>
-    </form>
+    @await Html.PartialAsync("BookPartial", Model.Book)
+    
+    <hr />
+
+    @await Html.PartialAsync("AddCommentPartial", new Comment() { BookId = Model.Book.BookID })
+
+    @await Html.PartialAsync("AllCommentPartial", Model.Comments)
 </div>

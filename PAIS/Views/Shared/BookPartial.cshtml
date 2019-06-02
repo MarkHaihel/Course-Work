@@ -1,0 +1,33 @@
+﻿@model Book
+
+<div class="bg-faded p-1">
+    <h4>
+        @Model.Name
+        <span class="badge badge-pill badge-primary" style="float:right">
+            <small>@Model.Price.ToString("c")</small>
+        </span>
+    </h4>
+</div>
+<div class="card-text p-1"><h5>@Model.Description</h5></div>
+<p>
+    Автор: @Model.Author<br />
+    Формат: @Model.Format<br />
+    Дата публікації: @Model.PublicationDate<br />
+    Тип публікації: @Model.PublicationType<br />
+    Палітурка: @Model.Binder<br />
+    Обсяг: @Model.Amount с.
+</p>
+<p>Анотація: @Model.Anotation</p>
+<p>ISBNCode: @Model.ISBNCode</p>
+<form id="@Model.BookID" asp-action="AddToCart"
+      asp-controller="Cart" method="post">
+    <input type="hidden" asp-for="BookID" />
+    <input type="hidden" name="returnUrl"
+           value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+    <span class="card-text p-1">
+        <button type="submit"
+                class="btn btn-success btn-sm pull-right" style="float:right">
+            Add To Cart
+        </button>
+    </span>
+</form>

@@ -21,15 +21,18 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
         <div class="container">
-            <a class="navbar-brand" asp-action="List" asp-controller="Book">PAIS</a>
+            <a class="navbar-brand" asp-action="List" asp-controller="Book">ПАІС</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbar1">
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Видавництво</a>
+                    </li>
                     <li class="nav-item active">
-                        <a class="nav-link" asp-action="List" asp-controller="Book">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" asp-action="List" asp-controller="Book">Видання<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
@@ -44,16 +47,14 @@
                         </div>
                     </li>
                 </ul>
-                <div class="m-1">
+
+                <div style="">
                     @await Component.InvokeAsync("CartSummary")
                 </div>
-                <form asp-controller="Book" asp-action="List" method="get" class="form-inline my-2 my-lg-0" style="margin-right:4px; margin-left:4px;">
-                    <input class="form-control form-control-sm mr-sm-2" type="text"
-                           name="search" placeholder="Пошук" aria-label="Search">
 
-                    <button class="btn btn-light btn-sm my-2 my-sm-0" type="submit">
-                        <i class="fa fa-search"></i>
-                    </button>
+                <form asp-controller="Book" asp-action="List" method="get" class="form-inline my-2 my-lg-0" style="margin-right:4px; margin-left:4px;">
+                    <input class="form-control form-control-sm mr-sm-1" type="text"
+                           name="search" placeholder="Пошук" aria-label="Search">
                 </form>
 
                 @if (!User.Identity.IsAuthenticated)

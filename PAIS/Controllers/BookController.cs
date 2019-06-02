@@ -2,6 +2,8 @@
 using PAIS.Models;
 using System.Linq;
 using PAIS.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace PAIS.Controllers
 {
@@ -42,5 +44,25 @@ namespace PAIS.Controllers
                 Book = bookRepository.GetBook(bookId),
                 Comments = commentRepository.Comments.Where(c => c.BookId == bookId)
             });
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult AddComment(Comment comment)
+        {
+            comment.Time = DateTime.Now;
+
+            commentRepository.SaveComment(comment);
+
+            return RedirectToAction("Details", "Book", new { bookId = comment.BookId });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult DeleteComment(int commentId)
+        {
+            Comment comment = commentRepository.DeleteComment(commentId);
+
+            return RedirectToAction("Details", "Book", new { bookId = comment.BookId });
+        }
     }
 }

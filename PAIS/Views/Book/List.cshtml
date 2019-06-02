@@ -4,17 +4,39 @@
     ViewBag.Title = "Видання";
     Layout = "_Layout";
 }
-<div class="row">
-    @foreach (Book b in Model.Books)
-    {
-        <div class="col-sm-12 col-md-6 col-lg-4">
-            @await Html.PartialAsync("BookSummary", b)
-        </div>
-    }
-</div>
 
-<div  page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
-     page-class="btn" page-class-normal="btn-secondary"
-     page-class-selected="btn-primary" page-url-category="@Model.Search"
-     class="btn-group pull-right m-1">
-</div>
+@if (Model.Books.Count() != 0)
+{
+    <h2>Видання</h2>
+    <hr />
+    <div>
+        <div class="row">
+            @foreach (Book b in Model.Books)
+            {
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    @await Html.PartialAsync("BookSummary", b)
+                </div>
+            }
+        </div>
+
+        <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
+             page-class="btn" page-class-normal="btn-secondary"
+             page-class-selected="btn-primary" page-url-category="@Model.Search"
+             class="btn-group pull-left m-1">
+        </div>
+    </div>
+}
+else if (Model.Search != null)
+{
+    <div class="text-center">
+        <h2>За пошуком: @Model.Search книг не знайдено!</h2>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <h2>Книг не знайдено!</h2>
+    </div>
+}
+
+<div style="height:40px;"></div>
