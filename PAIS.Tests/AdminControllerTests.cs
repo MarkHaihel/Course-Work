@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
+using PAIS.Models.ViewModels;
 using PAIS.Controllers;
 using PAIS.Models;
 using Xunit;
@@ -99,13 +100,13 @@ namespace PAIS.Tests
             };
 
             // Arrange - create a Book
-            Book book = new Book { Name = "Test" };
+            BookViewModel book = new BookViewModel { Name = "Test" };
 
             // Act - try to save the Book
             IActionResult result = target.Edit(book);
 
             // Assert - check that the repository was called
-            mock.Verify(m => m.SaveBook(book));
+            mock.Verify(m => m.SaveBook(new Book { Name = book.Name }));
 
             // Assert - check the result type is a redirection
             Assert.IsType<RedirectToActionResult>(result);
@@ -122,7 +123,7 @@ namespace PAIS.Tests
             AdminController target = new AdminController(mock.Object);
 
             // Arrange - create a Book
-            Book book = new Book { Name = "Test" };
+            BookViewModel book = new BookViewModel { Name = "Test" };
 
             // Arrange - add an error to the model state
             target.ModelState.AddModelError("error", "error");
