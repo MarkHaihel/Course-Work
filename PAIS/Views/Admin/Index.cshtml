@@ -7,7 +7,7 @@
 <h2 class="p-1">Всі книги</h2>
 
 <div class="p-1" style="margin-bottom:5px;">
-    <a asp-action="Create" class="btn btn-sm btn-link">Добавити книгу</a>
+    <a asp-action="Create" style="text-decoration: none;" class="btn btn-sm btn-link">Добавити книгу</a>
 </div>
 
 <table class="table table-sm">
@@ -23,13 +23,13 @@
             <td class="text-right">@item.Price.ToString("c")</td>
             <td class="text-center">
                 <form asp-action="Delete" method="post">
-                    <a asp-action="Edit" class="btn btn-sm btn-link"
+                    <a style="text-decoration: none;" asp-action="Edit" class="btn btn-sm btn-link"
                        asp-route-bookId="@item.BookID">
                         Редагувати
                     </a>
                     |
                     <input type="hidden" name="BookID" value="@item.BookID" />
-                    <button type="submit" class="btn btn-sm btn-link">
+                    <button style="text-decoration: none;" type="submit" class="btn btn-sm btn-link">
                         Видалити
                     </button>
                 </form>

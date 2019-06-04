@@ -24,7 +24,7 @@ namespace PAIS.Controllers
             {
                 Books = bookRepository.Books
                      .OrderBy(b => b.BookID)
-                     .Where(b => search == null || b.Name == search)
+                     .Where(b => search == null || b.Name.ToLower().Contains(search.ToLower()))
                      .Skip((bookPage - 1) * PageSize)
                      .Take(PageSize),
                 PagingInfo = new PagingInfo
@@ -34,7 +34,7 @@ namespace PAIS.Controllers
                     TotalItems = search == null ?
                         bookRepository.Books.Count() :
                         bookRepository.Books.Where(e =>
-                        e.PublicationType == search).Count()
+                        e.Name.ToLower().Contains(search.ToLower())).Count()
                 },
                 Search = search
             });
