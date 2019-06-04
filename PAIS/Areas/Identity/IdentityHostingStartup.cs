@@ -1,5 +1,5 @@
 ﻿using System;
-using DataAccess;
+using PAIS;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: HostingStartup(typeof(BookLibrary.Areas.Identity.IdentityHostingStartup))]
-namespace BookLibrary.Areas.Identity
+[assembly: HostingStartup(typeof(PAIS.Areas.Identity.IdentityHostingStartup))]
+namespace PAIS.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {

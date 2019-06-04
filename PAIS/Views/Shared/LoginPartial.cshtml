@@ -1,0 +1,35 @@
+﻿@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("List", "Book", new { area = "" })" method="post" id="logoutForm">
+        <ul class="nav navbar-nav navbar-right flex-md-row">
+            @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "library admin"))
+                {
+                    <li class="nav-item">
+                        <a style="color:lightgreen" class="nav-link px-3" href="/ManageLibrary/Index" title="Manage">Manage Library</a>
+                    </li>
+                }
+                @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "user admin"))
+                {
+                    <li class="nav-item">
+                        <a style="color:orangered" class="nav-link px-3" href="/ManageUsers/Index" title="Manage">Manage users</a>
+                    </li>
+                }
+            <li class="nav-item">
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Профіль" class="nav-link text-white px-3">@UserManager.GetUserName(User)</a>
+            </li>
+            <li class="nav-item">
+                <button type="submit" class="btn-danger btn-sm btn m-1">Вийти</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right flex-md-row">
+        <li class="nav-item pl-md-3"><a asp-area="Identity" asp-page="/Account/Register" class="nav-link">Реєстрація</a></li>
+        <li class="nav-item pl-md-3"><a asp-area="Identity" asp-page="/Account/Login" class="nav-link">Вхід</a></li>
+    </ul>
+}

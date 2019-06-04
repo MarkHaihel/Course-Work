@@ -48,7 +48,7 @@
                     </li>
                 </ul>
 
-                <div style="">
+                <div>
                     @await Component.InvokeAsync("CartSummary")
                 </div>
 
@@ -57,23 +57,7 @@
                            name="search" placeholder="Пошук" aria-label="Search">
                 </form>
 
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <a class="btn btn-outline-success m-1 btn-sm"
-                       asp-action="Registr" asp-controller="Account">
-                        Реєстрація
-                    </a>
-                }
-                <a asp-action="Index" asp-controller="Admin">
-                    <span class="btn btn-outline-warning btn-sm btn-dark m-1">@(User.Identity.IsAuthenticated ? User.Identity.Name : "Вхід")</span>
-                </a>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <a class="btn-outline-danger btn-sm btn btn-dark m-1"
-                       asp-action="Logout" asp-controller="Account">
-                        Вийти
-                    </a>
-                }
+                @await Html.PartialAsync("LoginPartial")
             </div>
         </div>
     </nav>
@@ -88,5 +72,7 @@
             </div>
         </div>
     </div>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -30,9 +30,11 @@ namespace PAIS
                 options.UseSqlServer(
                     Configuration["Data:PAISIdentity:ConnectionString"]));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDbContext>()
-                .AddDefaultTokenProviders();
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+            })
+                .AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultUI().AddDefaultTokenProviders();
 
             services.AddTransient<IBookRepository, EFBookRepository>();
             services.AddTransient<ICommentRepository, EFCommentRepository>();
