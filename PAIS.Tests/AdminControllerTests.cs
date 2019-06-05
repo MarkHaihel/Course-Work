@@ -10,7 +10,7 @@ using Xunit;
 
 namespace PAIS.Tests
 {
-    public class AdminControllerTests
+    public class ShopAdminControllerTests
     {
         [Fact]
         public void Index_Contains_All_Books()
@@ -25,7 +25,7 @@ namespace PAIS.Tests
             }.AsQueryable<Book>());
 
             // Arrange - create a controller
-            AdminController target = new AdminController(mock.Object);
+            ShopAdminController target = new ShopAdminController(mock.Object);
 
             // Action
             Book[] result
@@ -50,7 +50,7 @@ namespace PAIS.Tests
             }.AsQueryable<Book>());
 
             // Arrange - create the controller
-            AdminController target = new AdminController(mock.Object);
+            ShopAdminController target = new ShopAdminController(mock.Object);
 
             // Act
             Book p1 = GetViewModel<Book>(target.Edit(1));
@@ -75,7 +75,7 @@ namespace PAIS.Tests
             }.AsQueryable<Book>());
 
             // Arrange - create the controller
-            AdminController target = new AdminController(mock.Object);
+            ShopAdminController target = new ShopAdminController(mock.Object);
 
             // Act
             Book result = GetViewModel<Book>(target.Edit(4));
@@ -94,7 +94,7 @@ namespace PAIS.Tests
             Mock<ITempDataDictionary> tempData = new Mock<ITempDataDictionary>();
 
             // Arrange - create the controller
-            AdminController target = new AdminController(mock.Object)
+            ShopAdminController target = new ShopAdminController(mock.Object)
             {
                 TempData = tempData.Object
             };
@@ -120,7 +120,7 @@ namespace PAIS.Tests
             Mock<IBookRepository> mock = new Mock<IBookRepository>();
 
             // Arrange - create the controller
-            AdminController target = new AdminController(mock.Object);
+            ShopAdminController target = new ShopAdminController(mock.Object);
 
             // Arrange - create a Book
             BookViewModel book = new BookViewModel { Name = "Test" };
@@ -153,7 +153,7 @@ namespace PAIS.Tests
             }.AsQueryable<Book>());
 
             // Arrange - create the controller
-            AdminController target = new AdminController(mock.Object);
+            ShopAdminController target = new ShopAdminController(mock.Object);
 
             // Act - delete the Book
             target.Delete(book.BookID);

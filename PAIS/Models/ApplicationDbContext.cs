@@ -12,5 +12,6 @@ namespace PAIS.Models
         public DbSet<Book> Books { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<BlockedUser> BlockedUsers { get; set; }
     }
 }

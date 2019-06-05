@@ -5,16 +5,22 @@
 {
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("List", "Book", new { area = "" })" method="post" id="logoutForm">
         <ul class="nav navbar-nav navbar-right flex-md-row">
-            @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "library admin"))
+                @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "shop admin"))
                 {
                     <li class="nav-item">
-                        <a style="color:lightgreen" class="nav-link px-3" href="/ManageLibrary/Index" title="Manage">Manage Library</a>
+                        <a style="color:lightgreen" class="nav-link px-3" href="/ShopAdmin/Index" title="Books">Shop Admin</a>
                     </li>
                 }
                 @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "user admin"))
                 {
                     <li class="nav-item">
-                        <a style="color:orangered" class="nav-link px-3" href="/ManageUsers/Index" title="Manage">Manage users</a>
+                        <a style="color:orangered" class="nav-link px-3" href="/UsersAdmin/Index" title="Users">Users Admin</a>
+                    </li>
+                }
+                @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "news admin"))
+                {
+                    <li class="nav-item">
+                        <a style="color:yellow" class="nav-link px-3" href="/NewsAdmin/Index" title="News">News Admin</a>
                     </li>
                 }
             <li class="nav-item">

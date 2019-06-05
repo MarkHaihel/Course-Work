@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Authorization;
 namespace PAIS.Controllers
 {
     [Authorize]
-    public class AdminController : Controller
+    public class ShopAdminController : Controller
     {
         private IBookRepository repository;
 
-        public AdminController(IBookRepository repo)
+        public ShopAdminController(IBookRepository repo)
         {
             repository = repo;
         }
