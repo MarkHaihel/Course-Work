@@ -10,7 +10,7 @@
     isBlocked = blockedUserRepository.BlockedUsers.Where(b => b.UserId == userManager.GetUserId(User)).Any();
     if (!isBlocked)
     {
-        <form asp-action="AddComment" asp-controller="Book" method="post">
+        <form asp-action="AddComment" asp-controller="Home" method="post">
             <div class="form-group">
                 <input type="hidden" asp-for="OwnerId" value="@((await userManager.GetUserAsync(User)).Id)" />
             </div>
@@ -34,7 +34,7 @@
 else
 {
     <h4 style="color:brown">Авторизуйтесь або зареєструйтесь, для того щоб залишити коментар!</h4>
-    <form asp-action="AddComment" asp-controller="Book" method="post">
+    <form asp-action="AddComment" asp-controller="Home" method="post">
         <div class="form-group">
             <textarea class="form-control" disabled rows="3"></textarea>
         </div>

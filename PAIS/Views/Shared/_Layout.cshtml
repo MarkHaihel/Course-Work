@@ -21,7 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
         <div class="container">
-            <a class="navbar-brand" asp-action="List" asp-controller="Book">ПАІС</a>
+            <a class="navbar-brand" asp-action="List" asp-controller="Home">ПАІС</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,7 +32,7 @@
                         <a class="nav-link" href="#">Видавництво</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" asp-action="List" asp-controller="Book">Видання<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" asp-action="List" asp-controller="Home">Видання<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
@@ -43,7 +43,7 @@
                     @await Component.InvokeAsync("CartSummary")
                 </div>
 
-                <form asp-controller="Book" asp-action="List" method="get" class="form-inline my-2 my-lg-0" style="margin-right:4px; margin-left:4px;">
+                <form asp-controller="Home" asp-action="List" method="get" class="form-inline my-2 my-lg-0" style="margin-right:4px; margin-left:4px;">
                     <input class="form-control form-control-sm mr-sm-1" type="text"
                            name="search" placeholder="Пошук" aria-label="Search">
                 </form>

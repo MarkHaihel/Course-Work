@@ -58,7 +58,7 @@ namespace PAIS
                 routes.MapRoute(
                         name: null,
                         template: "{type}/Page{bookPage:int}",
-                        defaults: new { controller = "Book", action = "List" }
+                        defaults: new { controller = "Home", action = "List" }
                     );
                 routes.MapRoute(
                     name: null,
@@ -75,7 +75,7 @@ namespace PAIS
                     template: "{type}",
                     defaults: new
                     {
-                        controller = "Book",
+                        controller = "Home",
                         action = "List",
                         productPage = 1
                     }
@@ -85,7 +85,7 @@ namespace PAIS
                     template: "",
                     defaults: new
                     {
-                        controller = "Book",
+                        controller = "Home",
                         action = "List",
                         productPage = 1
                     });

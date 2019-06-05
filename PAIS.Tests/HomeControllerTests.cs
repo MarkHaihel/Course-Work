@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace PAIS.Tests
 {
-    public class BookControllerTests
+    public class HomeControllerTests
     {
         [Fact]
         public void CanPaginate()
@@ -28,7 +28,7 @@ namespace PAIS.Tests
             Mock<ICommentRepository> mock1 = new Mock<ICommentRepository>();
             mock1.Setup(m => m.Comments).Returns((new Comment[] { }).AsQueryable<Comment>());
 
-            BookController controller = new BookController(mock.Object, mock1.Object);
+            HomeController controller = new HomeController(mock.Object, mock1.Object);
             controller.PageSize = 3;
 
             //Act
@@ -60,8 +60,8 @@ namespace PAIS.Tests
 
 
             // Arrange
-            BookController controller =
-            new BookController(mock.Object, mock1.Object) { PageSize = 3 };
+            HomeController controller =
+            new HomeController(mock.Object, mock1.Object) { PageSize = 3 };
 
             // Act
             BooksListViewModel result =
@@ -93,7 +93,7 @@ namespace PAIS.Tests
             mock1.Setup(m => m.Comments).Returns((new Comment[] { }).AsQueryable<Comment>());
 
             // Arrange - create a controller and make the page size 3 items
-            BookController controller = new BookController(mock.Object, mock1.Object);
+            HomeController controller = new HomeController(mock.Object, mock1.Object);
             controller.PageSize = 3;
 
             // Action
@@ -122,7 +122,7 @@ namespace PAIS.Tests
             Mock<ICommentRepository> mock1 = new Mock<ICommentRepository>();
             mock1.Setup(m => m.Comments).Returns((new Comment[] { }).AsQueryable<Comment>());
 
-            BookController target = new BookController(mock.Object, mock1.Object);
+            HomeController target = new HomeController(mock.Object, mock1.Object);
             target.PageSize = 3;
             Func<ViewResult, BooksListViewModel> GetModel = result =>
                 result?.ViewData?.Model as BooksListViewModel;

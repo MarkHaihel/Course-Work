@@ -13,7 +13,7 @@
                 </p>
 
                 <div class="col-lg-10 p-0">
-                    <form asp-action="EditComment" asp-controller="Book" method="post">
+                    <form asp-action="EditComment" asp-controller="Home" method="post">
                         <div class="form-group">
                             <input type="hidden" asp-for="CommentId" value="@Model.CommentId" />
                         </div>
@@ -35,7 +35,7 @@
                     </form>
                 </div>
                 <div class="col-lg-2">
-                    <form asp-action="DeleteComment" asp-controller="Book" method="post">
+                    <form asp-action="DeleteComment" asp-controller="Home" method="post">
                         <div class="form-group">
                             <input type="hidden" asp-for="CommentId" value="@Model.CommentId" />
                         </div>
@@ -91,7 +91,7 @@
                         <p class="h5 text-secondary border px-3 py-2 rounded">@Model.Text</p>
                     </div>
                     <div class="col-lg-2">
-                        <form asp-action="DeleteComment" asp-controller="Book" method="post">
+                        <form asp-action="DeleteComment" asp-controller="Home" method="post">
                             <div class="form-group">
                                 <input type="hidden" asp-for="CommentId" value="@Model.CommentId" />
                             </div>
@@ -138,7 +138,7 @@
             <p class="h5 text-secondary border px-3 py-2 rounded">@Model.Text</p>
         </div>
         <div class="col-lg-2">
-            <form asp-action="DeleteComment" style="margin-top: 0px;" asp-controller="Book" method="post">
+            <form asp-action="DeleteComment" style="margin-top: 0px;" asp-controller="Home" method="post">
                 <div class="form-group">
                     <input type="hidden" asp-for="CommentId" value="@Model.CommentId" />
                 </div>

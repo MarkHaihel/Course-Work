@@ -8,13 +8,13 @@ using System.Diagnostics;
 
 namespace PAIS.Controllers
 {
-    public class BookController : Controller
+    public class HomeController : Controller
     {
         private IBookRepository bookRepository;
         private ICommentRepository commentRepository;
         public int PageSize = 6;
 
-        public BookController(IBookRepository bRepo, ICommentRepository cRepo)
+        public HomeController(IBookRepository bRepo, ICommentRepository cRepo)
         {
             bookRepository = bRepo;
             commentRepository = cRepo;
