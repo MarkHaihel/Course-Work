@@ -4,7 +4,7 @@ namespace PAIS.Models
 {
     public interface IBlockedUserRepository
     {
-        IQueryable<BlockedUser> BlockedUsers { get; set; }
+        IQueryable<BlockedUser> BlockedUsers { get; }
 
         void SaveBlockedUser(BlockedUser blockedUser);
 

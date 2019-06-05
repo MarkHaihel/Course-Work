@@ -4,6 +4,7 @@ using System.Linq;
 using PAIS.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System;
+using System.Diagnostics;
 
 namespace PAIS.Controllers
 {
@@ -49,6 +50,11 @@ namespace PAIS.Controllers
         [HttpPost]
         public IActionResult AddComment(Comment comment)
         {
+            if (comment == null)
+            {
+                return RedirectToAction("Error");
+            }
+
             comment.Time = DateTime.Now;
 
             commentRepository.SaveComment(comment);
@@ -58,11 +64,47 @@ namespace PAIS.Controllers
 
         [Authorize]
         [HttpPost]
+        public IActionResult EditComment(Comment comment, string text)
+        {
+            if (comment == null)
+            {
+                return RedirectToAction("Error");
+            }
+            if (string.IsNullOrEmpty(text))
+            {
+                commentRepository.DeleteComment(comment.CommentId);
+                goto loop;
+            }
+
+            commentRepository.SaveComment(comment);
+            loop:
+
+            return RedirectToAction("Details", "Book", new { bookId = comment.BookId });
+        }
+
+        [Authorize]
+        [HttpPost]
         public IActionResult DeleteComment(int commentId)
         {
+            if (commentId == 0)
+            {
+                return RedirectToAction("Error");
+            }
+
+            if (commentRepository.GetComment(commentId) == null)
+            {
+                return RedirectToAction("Error");
+            }
+
             Comment comment = commentRepository.DeleteComment(commentId);
 
             return RedirectToAction("Details", "Book", new { bookId = comment.BookId });
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

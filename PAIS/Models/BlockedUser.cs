@@ -2,7 +2,7 @@
 {
     public class BlockedUser
     {
-        public string BlockedUserId { get; set; }
+        public int BlockedUserId { get; set; }
         public string UserId { get; set; }
     }
 }

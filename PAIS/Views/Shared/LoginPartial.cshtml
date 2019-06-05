@@ -2,34 +2,31 @@
 @inject UserManager<IdentityUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
-{
+{ 
+    <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@UserManager.GetUserName(User)</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+            <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Профіль" class="dropdown-item btn-link">Профіль</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/Identity/Account/Manage/ChangePassword" title="Books">Змінити пароль</a>
+            <a class="dropdown-item" href="/Identity/Account/Manage/PersonalData" title="Books">Особисті дані</a>
+            @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "shop admin"))
+            {
+                <a class="dropdown-item" href="/ShopAdmin/Index" title="Books">Товари <span style="color:orangered;">(А)</span></a>
+            }
+            @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "user admin"))
+            {
+                <a class="dropdown-item" href="/UsersAdmin/Index" title="Users">Користувачі <span style="color:orangered;">(А)</span></a>
+            }
+            @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "news admin"))
+            {
+                <a class="dropdown-item" href="/NewsAdmin/Index" title="News">Новини <span style="color:orangered;">(А)</span></a>
+            }
+        </div>
+    </div>
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("List", "Book", new { area = "" })" method="post" id="logoutForm">
-        <ul class="nav navbar-nav navbar-right flex-md-row">
-                @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "shop admin"))
-                {
-                    <li class="nav-item">
-                        <a style="color:lightgreen" class="nav-link px-3" href="/ShopAdmin/Index" title="Books">Shop Admin</a>
-                    </li>
-                }
-                @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "user admin"))
-                {
-                    <li class="nav-item">
-                        <a style="color:orangered" class="nav-link px-3" href="/UsersAdmin/Index" title="Users">Users Admin</a>
-                    </li>
-                }
-                @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "news admin"))
-                {
-                    <li class="nav-item">
-                        <a style="color:yellow" class="nav-link px-3" href="/NewsAdmin/Index" title="News">News Admin</a>
-                    </li>
-                }
-            <li class="nav-item">
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Профіль" class="nav-link text-white px-3">@UserManager.GetUserName(User)</a>
-            </li>
-            <li class="nav-item">
-                <button type="submit" class="btn-danger btn-sm btn m-1">Вийти</button>
-            </li>
-        </ul>
+
+        <button type="submit" class="btn-danger btn-sm btn m-1">Вийти</button>
     </form>
 }
 else

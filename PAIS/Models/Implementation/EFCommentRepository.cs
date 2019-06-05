@@ -46,6 +46,21 @@ namespace PAIS.Models
 
             return dbEntry;
         }
+        public void DeleteUserComments(string userId)
+        {
+            foreach (var c in Comments.Where(c => c.OwnerId == userId))
+            {
+                Comment dbEntry = context.Comments
+                    .FirstOrDefault(p => p.CommentId == c.CommentId);
+
+                if (dbEntry != null)
+                {
+                    context.Comments.Remove(dbEntry);
+                }
+            }
+
+            context.SaveChanges();
+        }
 
         public Comment GetComment(int commentId)
         {

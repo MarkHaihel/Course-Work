@@ -91,8 +91,6 @@ namespace PAIS
                     });
                 routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
             });
-            //SeedData.EnsurePopulated(app);
-            //IdentitySeedData.EnsurePopulated(app);
         }
     }
 }

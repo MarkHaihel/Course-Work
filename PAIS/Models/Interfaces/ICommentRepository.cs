@@ -10,6 +10,8 @@ namespace PAIS.Models
 
         Comment DeleteComment(int commentId);
 
+        void DeleteUserComments(string userId);
+
         Comment GetComment(int commentId);
     }
 }

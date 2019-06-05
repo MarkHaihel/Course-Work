@@ -1,28 +1,45 @@
-﻿@using Microsoft.AspNetCore.Identity;
-
+﻿@inject SignInManager<IdentityUser> signInManager
 @inject UserManager<IdentityUser> userManager
-@inject SignInManager<IdentityUser> signInManager
+@inject IBlockedUserRepository blockedUserRepository
 
 @model Comment
-
+<h3 class="mt-5">Добавити коментар</h3>
+@{bool isBlocked = false;}
 @if (signInManager.IsSignedIn(User))
 {
-    <form asp-action="AddComment" asp-controller="Book" method="post">
-        <div class="form-group">
-            <input type="hidden" asp-for="OwnerId" value="@((await userManager.GetUserAsync(User)).Id)" />
-        </div>
-        <div class="form-group">
-            <input type="hidden" asp-for="BookId" value="@Model.BookId" />
-        </div>
-        <div class="form-group">
-            <textarea class="form-control" asp-for="Text" required rows="3"></textarea>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Comment" class="btn btn-success btn-sm" />
-        </div>
-    </form>
+    isBlocked = blockedUserRepository.BlockedUsers.Where(b => b.UserId == userManager.GetUserId(User)).Any();
+    if (!isBlocked)
+    {
+        <form asp-action="AddComment" asp-controller="Book" method="post">
+            <div class="form-group">
+                <input type="hidden" asp-for="OwnerId" value="@((await userManager.GetUserAsync(User)).Id)" />
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="BookId" value="@Model.BookId" />
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" asp-for="Text" required rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Comment" class="btn btn-success" />
+            </div>
+        </form>
+    }
+    else
+    {
+        <h4 style="color:brown">Ви не можете залишити коментар, тому що ви заблоковані!</h4>
+    }
 }
+
 else
 {
-    <p>Для того щоб залишити коментар авторизуйтесь або зареєструйтесь!</p>
+    <h4 style="color:brown">Авторизуйтесь або зареєструйтесь, для того щоб залишити коментар!</h4>
+    <form asp-action="AddComment" asp-controller="Book" method="post">
+        <div class="form-group">
+            <textarea class="form-control" disabled rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="submit" disabled value="Comment" class="btn btn-success" />
+        </div>
+    </form>
 }

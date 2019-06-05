@@ -158,10 +158,7 @@ namespace PAIS.Controllers
             blockedUserRepository.SaveBlockedUser(blockedUser);
 
             // delete all his comments
-            foreach (var c in commentRepository.Comments.Where(c => c.OwnerId == UserId))
-            {
-                commentRepository.DeleteComment(c.CommentId);
-            }
+            commentRepository.DeleteUserComments(UserId);
 
             return RedirectToAction("Details", "Book", new { bookId = BookId });
         }
@@ -173,7 +170,7 @@ namespace PAIS.Controllers
             {
                 RedirectToAction("Error");
             }
-            string id = blockedUserRepository.BlockedUsers.First(u => u.UserId == UserId).BlockedUserId;
+            string id = blockedUserRepository.BlockedUsers.First(u => u.UserId == UserId).UserId;
             blockedUserRepository.DeleteBlockedUser(id);
 
             return RedirectToAction("Index");

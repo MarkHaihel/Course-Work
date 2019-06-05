@@ -1,20 +1,10 @@
 ﻿@model IEnumerable<Comment>
 
-@foreach (var c in Model)
+<hr style="border-width: 2px; border-color: grey;" />
+<h3>@Model.Count() коментарів</h3>
+<hr style="border-width: 2px; border-color: grey;" />
+@foreach (var c in Model.OrderByDescending(c => c.Time))
 {
-    <div class="col-lg-11">
-        <p><ins style="color:black">Змінити на ім'я користувача</ins>  <em style="color:dimgrey">@c.Time</em></p>
-        <div class="form-group">
-            <p class="h5 text-secondary border px-3 py-2 rounded">@c.Text</p>
-        </div>
-    </div>
-    <div class="col-lg-1">
-        <form asp-action="DeleteComment" asp-controller="Book" method="post">
-            <input type="hidden" name="commentId" value="@c.CommentId" />
-
-            <div class="form-group">
-                <input type="submit" class="btn btn-sm btn-danger" value="Видалити" />
-            </div>
-        </form>
-    </div>
+    @await Html.PartialAsync("CommentPartial", c)
+    <hr style="border-width: 2px; border-color: grey;" />
 }
