@@ -33,7 +33,7 @@ namespace PAIS.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(7, ErrorMessage = " {0} має бути не менше {2} і не більше {1} символів.", MinimumLength = 6)]
             [DataType(DataType.Text)]
             [Display(Name = "Authenticator code")]
             public string TwoFactorCode { get; set; }
@@ -49,7 +49,7 @@ namespace PAIS.Areas.Identity.Pages.Account
 
             if (user == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Неможливо завантажити користувача з двома факторами автентифікації.");
             }
 
             ReturnUrl = returnUrl;
@@ -70,7 +70,7 @@ namespace PAIS.Areas.Identity.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Неможливо завантажити користувача з двома факторами автентифікації.");
             }
 
             var authenticatorCode = Input.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
@@ -79,18 +79,18 @@ namespace PAIS.Areas.Identity.Pages.Account
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID '{UserId}' logged in with 2fa.", user.Id);
+                _logger.LogInformation("Користувач з ідентифікатором '{UserId}' увійшов у систему за допомогою 2fa.", user.Id);
                 return LocalRedirect(returnUrl);
             }
             else if (result.IsLockedOut)
             {
-                _logger.LogWarning("User with ID '{UserId}' account locked out.", user.Id);
+                _logger.LogWarning("Користувач з обліковим записом ID '{UserId}' заблоковано", user.Id);
                 return RedirectToPage("./Lockout");
             }
             else
             {
-                _logger.LogWarning("Invalid authenticator code entered for user with ID '{UserId}'.", user.Id);
-                ModelState.AddModelError(string.Empty, "Invalid authenticator code.");
+                _logger.LogWarning("Недійсний код автентифікатора, введений для користувача з ID '{UserId}'.", user.Id);
+                ModelState.AddModelError(string.Empty, "Недійсний код аутентифікатора.");
                 return Page();
             }
         }  

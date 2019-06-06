@@ -47,7 +47,7 @@ namespace PAIS.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Required]
-            [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(7, ErrorMessage = "{0} має бути як мінімум {2} і не більше {1} символів.", MinimumLength = 6)]
             [DataType(DataType.Text)]
             [Display(Name = "Verification Code")]
             public string Code { get; set; }
@@ -58,7 +58,7 @@ namespace PAIS.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не вдається завантажити користувача з ID '{_userManager.GetUserId(User)}'.");
             }
 
             await LoadSharedKeyAndQrCodeUriAsync(user);
@@ -71,7 +71,7 @@ namespace PAIS.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не вдається завантажити користувача з ID '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -88,7 +88,7 @@ namespace PAIS.Areas.Identity.Pages.Account.Manage
 
             if (!is2faTokenValid)
             {
-                ModelState.AddModelError("Input.Code", "Verification code is invalid.");
+                ModelState.AddModelError("Input.Code", "Код перевірки недійсний.");
                 await LoadSharedKeyAndQrCodeUriAsync(user);
                 return Page();
             }
@@ -97,7 +97,7 @@ namespace PAIS.Areas.Identity.Pages.Account.Manage
             var userId = await _userManager.GetUserIdAsync(user);
             _logger.LogInformation("User with ID '{UserId}' has enabled 2FA with an authenticator app.", userId);
 
-            StatusMessage = "Your authenticator app has been verified.";
+            StatusMessage = "Додаток автентифікатора підтверджено.";
 
             if (await _userManager.CountRecoveryCodesAsync(user) == 0)
             {

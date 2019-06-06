@@ -64,13 +64,13 @@ namespace PAIS.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (remoteError != null)
             {
-                ErrorMessage = $"Error from external provider: {remoteError}";
+                ErrorMessage = $"Помилка від зовнішнього провайдера: {remoteError}";
                 return RedirectToPage("./Login", new {ReturnUrl = returnUrl });
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                ErrorMessage = "Error loading external login information.";
+                ErrorMessage = "Помилка завантаження зовнішньої реєстраційної інформації.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
@@ -78,7 +78,7 @@ namespace PAIS.Areas.Identity.Pages.Account
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor : true);
             if (result.Succeeded)
             {
-                _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
+                _logger.LogInformation("{Name} увійшов у систему {LoginProvider} провайдером.", info.Principal.Identity.Name, info.LoginProvider);
                 return LocalRedirect(returnUrl);
             }
             if (result.IsLockedOut)
@@ -108,7 +108,7 @@ namespace PAIS.Areas.Identity.Pages.Account
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                ErrorMessage = "Error loading external login information during confirmation.";
+                ErrorMessage = "Помилка завантаження зовнішньої реєстраційної інформації під час підтвердження.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
@@ -122,7 +122,7 @@ namespace PAIS.Areas.Identity.Pages.Account
                     if (result.Succeeded)
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+                        _logger.LogInformation("Користувач створив обліковий запис за допомогою {Name} провайдера.", info.LoginProvider);
                         return LocalRedirect(returnUrl);
                     }
                 }

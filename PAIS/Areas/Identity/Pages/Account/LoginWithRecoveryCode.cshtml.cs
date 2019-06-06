@@ -43,7 +43,7 @@ namespace PAIS.Areas.Identity.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Неможливо завантажити користувача з двома факторами автентифікації.");
             }
 
             ReturnUrl = returnUrl;
@@ -61,7 +61,7 @@ namespace PAIS.Areas.Identity.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Неможливо завантажити користувача з двома факторами автентифікації.");
             }
 
             var recoveryCode = Input.RecoveryCode.Replace(" ", string.Empty);
@@ -70,18 +70,18 @@ namespace PAIS.Areas.Identity.Pages.Account
                 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID '{UserId}' logged in with a recovery code.", user.Id);
+                _logger.LogInformation("Користувач з ідентифікатором '{UserId}' увійшов до системи з кодом відновлення.", user.Id);
                 return LocalRedirect(returnUrl ?? Url.Content("~/"));
             }
             if (result.IsLockedOut)
             {
-                _logger.LogWarning("User with ID '{UserId}' account locked out.", user.Id);
+                _logger.LogWarning("Користувача з обліковим записом ID '{UserId}' заблоковано.", user.Id);
                 return RedirectToPage("./Lockout");
             }
             else
             {
-                _logger.LogWarning("Invalid recovery code entered for user with ID '{UserId}' ", user.Id);
-                ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
+                _logger.LogWarning("Недійсний код відновлення, введений для користувача з ID '{UserId}' ", user.Id);
+                ModelState.AddModelError(string.Empty, "Введено недійсний код відновлення.");
                 return Page();
             }
         }
