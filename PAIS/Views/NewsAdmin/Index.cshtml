@@ -1,0 +1,41 @@
+﻿@model IEnumerable<News>
+
+@{
+    Layout = "_Layout";
+}
+
+<h2 class="p-1">Всі новини</h2>
+
+<div class="p-1" style="margin-bottom:5px;">
+    <a asp-action="Create" style="text-decoration: none;" class="btn btn-sm btn-link">Добавити новину</a>
+</div>
+
+<table class="table table-sm">
+    <tr>
+        <th>Назва</th>
+        <th class="text-right">Дата</th>
+        <th class="text-right">Автор</th>
+        <th class="text-center">Дії</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td class="text-right">@item.Date.ToString("MM/dd/yyyy")</td>
+            <td class="text-right">@item.Author</td>
+            <td class="text-center">
+                <form asp-action="Delete" method="post">
+                    <a style="text-decoration: none;" asp-action="Edit" class="btn btn-sm btn-link"
+                       asp-route-newsId="@item.NewsID">
+                        Редагувати
+                    </a>
+                    |
+                    <input type="hidden" name="NewsID" value="@item.NewsID" />
+                    <button style="text-decoration: none;" type="submit" class="btn btn-sm btn-link">
+                        Видалити
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

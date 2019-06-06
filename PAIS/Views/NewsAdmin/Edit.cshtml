@@ -1,0 +1,40 @@
+﻿@model News
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>
+    Редагування новини
+</h2>
+
+<hr />
+
+<form asp-action="Edit" style="padding:0px;" method="post" class="col-md-6 col-lg-5">
+    <input type="hidden" asp-for="NewsID" />
+    <div class="form-group">
+        <label asp-for="Name">Назва</label>
+        <div><span asp-validation-for="Name" class="text-danger"></span></div>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Опис</label>
+        <div><span asp-validation-for="Description" class="text-danger"></span></div>
+        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="Author">Автор</label>
+        <div><span asp-validation-for="Author" class="text-danger"></span></div>
+        <input asp-for="Author" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Date">Дата</label>
+        <div><span asp-validation-for="Date" class="text-danger"></span></div>
+        <input type="date" asp-for="Date" class="form-control " />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-outline-dark" type="submit">Зберегти</button>
+        <a asp-action="Index" class="btn btn-link">Відмінити</a>
+    </div>
+</form>
+<hr />

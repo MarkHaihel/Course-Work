@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace PAIS.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "shop admin")]
     public class ShopAdminController : Controller
     {
         private IBookRepository repository;

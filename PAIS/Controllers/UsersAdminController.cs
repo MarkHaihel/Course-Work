@@ -160,7 +160,7 @@ namespace PAIS.Controllers
             // delete all his comments
             commentRepository.DeleteUserComments(UserId);
 
-            return RedirectToAction("Details", "Book", new { bookId = BookId });
+            return RedirectToAction("Details", "Home", new { bookId = BookId });
         }
 
         [HttpGet]

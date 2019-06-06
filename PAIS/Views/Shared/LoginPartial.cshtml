@@ -10,10 +10,6 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/Identity/Account/Manage/ChangePassword" title="Books">Змінити пароль</a>
             <a class="dropdown-item" href="/Identity/Account/Manage/PersonalData" title="Books">Особисті дані</a>
-            @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "shop admin"))
-            {
-                <a class="dropdown-item" href="/ShopAdmin/Index" title="Books">Товари <span style="color:orangered;">(А)</span></a>
-            }
             @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "user admin"))
             {
                 <a class="dropdown-item" href="/UsersAdmin/Index" title="Users">Користувачі <span style="color:orangered;">(А)</span></a>
@@ -22,9 +18,13 @@
             {
                 <a class="dropdown-item" href="/NewsAdmin/Index" title="News">Новини <span style="color:orangered;">(А)</span></a>
             }
+            @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "shop admin"))
+            {
+                <a class="dropdown-item" href="/ShopAdmin/Index" title="Books">Товари <span style="color:orangered;">(А)</span></a>
+            }
         </div>
     </div>
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("List", "Book", new { area = "" })" method="post" id="logoutForm">
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("List", "Home", new { area = "" })" method="post" id="logoutForm">
 
         <button type="submit" class="btn-danger btn-sm btn m-1">Вийти</button>
     </form>

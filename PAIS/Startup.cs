@@ -37,6 +37,7 @@ namespace PAIS
                 .AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultUI().AddDefaultTokenProviders();
 
             services.AddTransient<IBookRepository, EFBookRepository>();
+            services.AddTransient<INewsRepository, EFNewsRepository>();
             services.AddTransient<ICommentRepository, EFCommentRepository>();
             services.AddTransient<IBlockedUserRepository, EFBlockedUserRepository>();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));

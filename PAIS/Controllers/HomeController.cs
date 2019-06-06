@@ -59,7 +59,7 @@ namespace PAIS.Controllers
 
             commentRepository.SaveComment(comment);
 
-            return RedirectToAction("Details", "Book", new { bookId = comment.BookId });
+            return RedirectToAction("Details", "Home", new { bookId = comment.BookId });
         }
 
         [Authorize]
@@ -79,7 +79,7 @@ namespace PAIS.Controllers
             commentRepository.SaveComment(comment);
             loop:
 
-            return RedirectToAction("Details", "Book", new { bookId = comment.BookId });
+            return RedirectToAction("Details", "Home", new { bookId = comment.BookId });
         }
 
         [Authorize]
@@ -98,7 +98,7 @@ namespace PAIS.Controllers
 
             Comment comment = commentRepository.DeleteComment(commentId);
 
-            return RedirectToAction("Details", "Book", new { bookId = comment.BookId });
+            return RedirectToAction("Details", "Home", new { bookId = comment.BookId });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
