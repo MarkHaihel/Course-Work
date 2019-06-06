@@ -17,16 +17,12 @@ namespace PAIS.Data
             string ShopAdminEmail = "ShopAdmin@gmail.com";
             string ShopAdminPassword = "_Aa123456ShopAdmin";
 
-            string NewsAdminEmail = "NewsAdmin@gmail.com";
-            string NewsAdminPassword = "_Aa123456NewsAdmin";
-
             string SuperAdminEmail = "SuperAdmin@gmail.com";
             string SuperAdminPassword = "SuperAdmin123.";
 
 
             string UserAdminRole = "user admin";
             string ShopAdminRole = "shop admin";
-            string NewsAdminRole = "news admin";
             string UserRole = "user";
             if (await roleManager.FindByNameAsync(UserAdminRole) == null)
             {
@@ -35,10 +31,6 @@ namespace PAIS.Data
             if (await roleManager.FindByNameAsync(ShopAdminRole) == null)
             {
                 await roleManager.CreateAsync(new IdentityRole(ShopAdminRole));
-            }
-            if (await roleManager.FindByNameAsync(NewsAdminRole) == null)
-            {
-                await roleManager.CreateAsync(new IdentityRole(NewsAdminRole));
             }
             if (await roleManager.FindByNameAsync(UserRole) == null)
             {
@@ -62,15 +54,6 @@ namespace PAIS.Data
                     await userManager.AddToRoleAsync(ShopAdmin, ShopAdminRole);
                 }
             }
-            if (await userManager.FindByNameAsync(NewsAdminEmail) == null)
-            {
-                IdentityUser NewsAdmin = new IdentityUser { UserName = "AliceNewsAdmin", Email = NewsAdminEmail };
-                IdentityResult result = await userManager.CreateAsync(NewsAdmin, NewsAdminPassword);
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(NewsAdmin, NewsAdminRole);
-                }
-            }
             if (await userManager.FindByNameAsync(SuperAdminEmail) == null)
             {
                 IdentityUser SuperAdmin = new IdentityUser { UserName = "SuperAdmin", Email = SuperAdminEmail };
@@ -78,7 +61,6 @@ namespace PAIS.Data
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(SuperAdmin, ShopAdminRole);
-                    await userManager.AddToRoleAsync(SuperAdmin, NewsAdminRole);
                     await userManager.AddToRoleAsync(SuperAdmin, UserAdminRole);
                     await userManager.AddToRoleAsync(SuperAdmin, UserRole);
                 }

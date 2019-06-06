@@ -14,12 +14,9 @@
             {
                 <a class="dropdown-item" href="/UsersAdmin/Index" title="Users">Користувачі <span style="color:orangered;">(А)</span></a>
             }
-            @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "news admin"))
-            {
-                <a class="dropdown-item" href="/NewsAdmin/Index" title="News">Новини <span style="color:orangered;">(А)</span></a>
-            }
             @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "shop admin"))
             {
+                <a class="dropdown-item" href="/NewsAdmin/Index" title="News">Новини <span style="color:orangered;">(А)</span></a>
                 <a class="dropdown-item" href="/ShopAdmin/Index" title="Books">Товари <span style="color:orangered;">(А)</span></a>
             }
         </div>

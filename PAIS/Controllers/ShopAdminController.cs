@@ -11,18 +11,20 @@ namespace PAIS.Controllers
     [Authorize(Roles = "shop admin")]
     public class ShopAdminController : Controller
     {
-        private IBookRepository repository;
+        private IBookRepository bookRepository;
+        private ICommentRepository commentRepository;
 
-        public ShopAdminController(IBookRepository repo)
+        public ShopAdminController(IBookRepository bRepo, ICommentRepository cRepo)
         {
-            repository = repo;
+            bookRepository = bRepo;
+            commentRepository = cRepo;
         }
 
-        public ViewResult Index() => View(repository.Books);
+        public ViewResult Index() => View(bookRepository.Books);
 
         public ViewResult Edit(int bookId)
         {
-            Book model = repository.Books
+            Book model = bookRepository.Books
                    .FirstOrDefault(b => b.BookID == bookId);
 
             return View(new BookViewModel
@@ -70,7 +72,7 @@ namespace PAIS.Controllers
                 //newBook.Image = imageData;
                 newBook.Image = new byte[] { 3, 10, 8, 25 };
 
-                repository.SaveBook(newBook);
+                bookRepository.SaveBook(newBook);
                 TempData["message"] = $"{newBook.Name} has been saved";
                 return RedirectToAction("Index");
             }
@@ -86,7 +88,9 @@ namespace PAIS.Controllers
         [HttpPost]
         public IActionResult Delete(int bookId)
         {
-            Book deletetBook = repository.DeleteBook(bookId);
+            Book deletetBook = bookRepository.DeleteBook(bookId);
+
+            commentRepository.DeleteBookComments(bookId);
 
             if (deletetBook != null)
             {

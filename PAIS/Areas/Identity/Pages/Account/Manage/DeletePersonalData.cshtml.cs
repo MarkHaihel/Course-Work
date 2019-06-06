@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using PAIS.Models;
 
 namespace PAIS.Areas.Identity.Pages.Account.Manage
 {
@@ -13,15 +14,18 @@ namespace PAIS.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
+        private readonly ICommentRepository commentRepository;
 
         public DeletePersonalDataModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<DeletePersonalDataModel> logger,
+            ICommentRepository cRepo)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            commentRepository = cRepo;
         }
 
         [BindProperty]
@@ -68,6 +72,7 @@ namespace PAIS.Areas.Identity.Pages.Account.Manage
 
             var result = await _userManager.DeleteAsync(user);
             var userId = await _userManager.GetUserIdAsync(user);
+
             if (!result.Succeeded)
             {
                 throw new InvalidOperationException($"Неочікувана помилка при вимкненні 2FA для користувача з ID '{userId}'");
@@ -76,6 +81,8 @@ namespace PAIS.Areas.Identity.Pages.Account.Manage
             await _signInManager.SignOutAsync();
 
             _logger.LogInformation("Користувач з ID '{UserId}' видалив себе.", userId);
+
+            commentRepository.DeleteUserComments(userId);
 
             return Redirect("~/");
         }

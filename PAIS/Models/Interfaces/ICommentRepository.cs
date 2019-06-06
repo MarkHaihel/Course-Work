@@ -12,6 +12,8 @@ namespace PAIS.Models
 
         void DeleteUserComments(string userId);
 
+        void DeleteBookComments(int bookId);
+
         Comment GetComment(int commentId);
     }
 }

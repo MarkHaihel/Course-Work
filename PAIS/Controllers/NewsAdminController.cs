@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace PAIS.Controllers
 {
-    [Authorize(Roles = "news admin")]
+    [Authorize(Roles = "shop admin")]
     public class NewsAdminController : Controller
     {
         private INewsRepository repository;

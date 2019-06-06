@@ -61,6 +61,21 @@ namespace PAIS.Models
 
             context.SaveChanges();
         }
+        public void DeleteBookComments(int bookId)
+        {
+            foreach (var c in Comments.Where(c => c.BookId == bookId))
+            {
+                Comment dbEntry = context.Comments
+                    .FirstOrDefault(p => p.CommentId == c.CommentId);
+
+                if (dbEntry != null)
+                {
+                    context.Comments.Remove(dbEntry);
+                }
+            }
+
+            context.SaveChanges();
+        }
 
         public Comment GetComment(int commentId)
         {

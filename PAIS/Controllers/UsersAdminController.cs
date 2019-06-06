@@ -93,10 +93,7 @@ namespace PAIS.Controllers
                     return RedirectToAction("Error");
                 }
             }
-            foreach (var c in commentRepository.Comments.Where(c => c.OwnerId == id))
-            {
-                commentRepository.DeleteComment(c.CommentId);
-            }
+            commentRepository.DeleteUserComments(id);
 
             return RedirectToAction("Index");
         }
