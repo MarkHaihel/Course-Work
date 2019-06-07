@@ -1,0 +1,25 @@
+﻿@model News
+
+<div class="card card-outline-primary p-2 col-lg-8">
+        <div>
+            <h3><a class="text-decoration-none" asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@Model.NewsID">@Model.Name</a></h3>
+            <p>@Model.Date.ToString("MM/dd/yyyy") @Model.Author</p>
+        </div>
+
+        <div class="card-text p-1">
+            @if (Model.Description.Length > 372)
+            {
+                @Model.Description.Substring(0, Math.Min(Model.Description.Length, 372));@:...
+            }
+            else
+            {
+                @Model.Description;
+            }
+        </div>
+
+        <div>
+            <a asp-action="NewsDetails" asp-controller="Home" asp-route-newsID="@Model.NewsID" >
+                <span class="btn btn-outline-primary pull-right">Читати далі</span>
+            </a>
+        </div>
+    </div>

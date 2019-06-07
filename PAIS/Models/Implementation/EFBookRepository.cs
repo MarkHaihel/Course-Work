@@ -38,6 +38,8 @@ namespace PAIS.Models
                     dbEntry.Anotation = book.Anotation;
                     dbEntry.ISBNCode = book.ISBNCode;
                     dbEntry.Price = book.Price;
+                    dbEntry.Rate = book.Rate;
+                    dbEntry.RatesAmount = book.RatesAmount;
                 }
             }
             context.SaveChanges();

@@ -1,41 +1,43 @@
-﻿@model BooksListViewModel
+﻿@model NewsListViewModel
 
 @{
     ViewBag.Title = "Видання";
     Layout = "_Layout";
 }
 
-@if (Model.Books.Count() != 0)
+@if (Model.NewsRepo.Count() != 0)
 {
-    <h2 class="p-1">Видання</h2>
+    <h2 class="p-1">Новини</h2>
     <hr />
     <div>
         <div class="row">
-            @foreach (Book b in Model.Books)
+            @foreach (News b in Model.NewsRepo)
             {
-                <div class="col-sm-12 col-md-6 col-lg-4">
-                    @await Html.PartialAsync("BookSummary", b)
+                <div class="col-12">
+                    @await Html.PartialAsync("NewsSummary", b)
                 </div>
             }
         </div>
 
+        <div style="height: 20px;"></div>
+
         <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
              page-class="btn" page-class-normal="btn-secondary"
              page-class-selected="btn-primary" page-url-category="@Model.Search"
-             class="btn-group pull-right m-1">
+             class="btn-group pull-left m-1">
         </div>
     </div>
 }
 else if (Model.Search != null)
 {
     <div class="text-center">
-        <h2>За пошуком: @Model.Search книг не знайдено!</h2>
+        <h2>За пошуком: @Model.Search новин не знайдено!</h2>
     </div>
 }
 else
 {
     <div class="text-center">
-        <h2>Книг не знайдено!</h2>
+        <h2>Новин не знайдено</h2>
     </div>
 }
 

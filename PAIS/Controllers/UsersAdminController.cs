@@ -15,14 +15,17 @@ namespace PAIS.Controllers
     {
         private UserManager<IdentityUser> userManager;
         private RoleManager<IdentityRole> roleManager;
+        private IRateRepository rateRepository;
         private ICommentRepository commentRepository;
         private IBlockedUserRepository blockedUserRepository;
 
         public UsersAdminController(RoleManager<IdentityRole> _roleManager, UserManager<IdentityUser> _userManager,
-            ICommentRepository _commentRepository, IBlockedUserRepository _blockedUserRepository)
+            ICommentRepository _commentRepository, IBlockedUserRepository _blockedUserRepository, 
+            IRateRepository _rateRepository)
         {
             userManager = _userManager;
             roleManager = _roleManager;
+            rateRepository = _rateRepository;
             commentRepository = _commentRepository;
             blockedUserRepository = _blockedUserRepository;
         }
@@ -94,6 +97,7 @@ namespace PAIS.Controllers
                 }
             }
             commentRepository.DeleteUserComments(id);
+            rateRepository.DeleteUserRates(id);
 
             return RedirectToAction("Index");
         }

@@ -15,17 +15,20 @@ namespace PAIS.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
         private readonly ICommentRepository commentRepository;
+        private readonly IRateRepository rateRepository;
 
         public DeletePersonalDataModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<DeletePersonalDataModel> logger,
-            ICommentRepository cRepo)
+            ICommentRepository cRepo,
+            IRateRepository rRepo)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             commentRepository = cRepo;
+            rateRepository = rRepo;
         }
 
         [BindProperty]
@@ -83,6 +86,7 @@ namespace PAIS.Areas.Identity.Pages.Account.Manage
             _logger.LogInformation("Користувач з ID '{UserId}' видалив себе.", userId);
 
             commentRepository.DeleteUserComments(userId);
+            rateRepository.DeleteUserRates(userId);
 
             return Redirect("~/");
         }

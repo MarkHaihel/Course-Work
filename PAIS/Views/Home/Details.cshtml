@@ -5,10 +5,57 @@
     Layout = "_Layout";
 }
 
+@inject UserManager<IdentityUser> userManager
+@inject SignInManager<IdentityUser> signInManager
+
 <div class="card card-outline-primary m-1 p-1">
     @await Html.PartialAsync("BookPartial", Model.Book)
-    
+
     <hr />
+
+    <div class="d-flex">
+        @if (Model.Book.Rate <= 1)
+        {
+            <div class="h4 pr-3">Оцінка: <b style="color:firebrick">@Model.Book.Rate</b> / 5</div>
+        }
+        else if (Model.Book.Rate <= 2)
+        {
+            <div class="h4 pr-3">Оцінка: <b style="color:darkorange">@Model.Book.Rate</b> / 5</div>
+        }
+        else if (Model.Book.Rate <= 3)
+        {
+            <div class="h4 pr-3">Оцінка: <b style="color:gold">@Model.Book.Rate</b> / 5</div>
+        }
+        else if (Model.Book.Rate <= 4)
+        {
+            <div class="h4 pr-3">Оцінка: <b style="color:yellowgreen">@Model.Book.Rate</b> / 5</div>
+        }
+        else
+        {
+            <div class="h4 pr-3">Оцінка: <b style="color:limegreen">@Model.Book.Rate</b> / 5</div>
+        }
+    </div>
+    <div class="d-flex">
+        <div class="h4 pr-3">Кількість оцінок: @Model.Book.RatesAmount</div>
+    </div>
+
+    @if (signInManager.IsSignedIn(User))
+    {
+        await Html.RenderPartialAsync("RatePartial", new Rate { BookId = Model.Book.BookID, UserId = (await userManager.GetUserAsync(User)).Id });
+    }
+    else
+    {
+        <form asp-action="RateBook" asp-controller="Home" method="post" class="d-flex">
+            <div class="form-group pt-3">
+                <select type="number" class="form-control form-control-lg rate-select" disabled>
+                    <option>1</option>
+                </select>
+            </div>
+            <div class="form-group mb-2 d-flex align-items-center ml-3">
+                <button type="submit" disabled class="btn btn-sm btn-success">Rate</button>
+            </div>
+        </form>
+    }
 
     @await Html.PartialAsync("AddCommentPartial", new Comment() { BookId = Model.Book.BookID })
 

@@ -1,0 +1,16 @@
+﻿@model News
+<h2 class="p-1">Новини</h2>
+<hr />
+<div class="card card-outline-primary p-2 col-lg-8">
+    <div>
+        <h3>@Model.Name</h3>
+        <p>@Model.Date.ToString("MM/dd/yyyy") @Model.Author</p>
+    </div>
+
+    <div class="card-text p-1">
+        @Model.Description;
+    </div>
+    <a asp-action="NewsList" asp-controller="Home">
+        <span class="btn btn-outline-primary pull-right">Назад</span>
+    </a>
+</div>

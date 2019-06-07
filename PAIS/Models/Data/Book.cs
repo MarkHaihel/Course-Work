@@ -18,5 +18,7 @@ namespace PAIS.Models
         public string Anotation { get; set; }
         public string ISBNCode { get; set; }
         public decimal Price { get; set; }
+        public decimal Rate { get; set; }
+        public uint RatesAmount { get; set; }
     }
 }

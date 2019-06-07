@@ -38,6 +38,7 @@ namespace PAIS
 
             services.AddTransient<IBookRepository, EFBookRepository>();
             services.AddTransient<INewsRepository, EFNewsRepository>();
+            services.AddTransient<IRateRepository, EFRateRepository>();
             services.AddTransient<ICommentRepository, EFCommentRepository>();
             services.AddTransient<IBlockedUserRepository, EFBlockedUserRepository>();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));

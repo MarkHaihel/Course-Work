@@ -13,11 +13,13 @@ namespace PAIS.Controllers
     {
         private IBookRepository bookRepository;
         private ICommentRepository commentRepository;
+        private IRateRepository rateRepository;
 
-        public ShopAdminController(IBookRepository bRepo, ICommentRepository cRepo)
+        public ShopAdminController(IBookRepository bRepo, ICommentRepository cRepo, IRateRepository rRepo)
         {
             bookRepository = bRepo;
             commentRepository = cRepo;
+            rateRepository = rRepo;
         }
 
         public ViewResult Index() => View(bookRepository.Books);
@@ -40,7 +42,9 @@ namespace PAIS.Controllers
                 Amount = model.Amount,
                 Anotation = model.Anotation,
                 ISBNCode = model.ISBNCode,
-                Price = model.Price
+                Price = model.Price,
+                Rate = model.Rate,
+                RatesAmount = model.RatesAmount
             });
         }
 
@@ -62,7 +66,9 @@ namespace PAIS.Controllers
                     Amount = model.Amount,
                     Anotation = model.Anotation,
                     ISBNCode = model.ISBNCode,
-                    Price = model.Price
+                    Price = model.Price,
+                    Rate = model.Rate,
+                    RatesAmount = model.RatesAmount
                 };
                 //byte[] imageData = null;
                 //using (var binaryReader = new BinaryReader(model.Image.OpenReadStream()))
@@ -83,7 +89,7 @@ namespace PAIS.Controllers
             }
         }
 
-        public ViewResult Create() => View("Edit", new BookViewModel());
+        public ViewResult Create() => View("Edit", new BookViewModel() { Rate = 0, RatesAmount = 0 });
 
         [HttpPost]
         public IActionResult Delete(int bookId)
@@ -91,6 +97,7 @@ namespace PAIS.Controllers
             Book deletetBook = bookRepository.DeleteBook(bookId);
 
             commentRepository.DeleteBookComments(bookId);
+            rateRepository.DeleteBookRates(bookId);
 
             if (deletetBook != null)
             {

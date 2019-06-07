@@ -5,32 +5,38 @@ using PAIS.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace PAIS.Controllers
 {
     public class HomeController : Controller
     {
         private IBookRepository bookRepository;
+        private IRateRepository rateRepository;
         private ICommentRepository commentRepository;
+        private INewsRepository newsRepository;
         public int PageSize = 6;
 
-        public HomeController(IBookRepository bRepo, ICommentRepository cRepo)
+        public HomeController(IBookRepository bRepo, ICommentRepository cRepo, IRateRepository rRepo
+            ,INewsRepository nRepo)
         {
             bookRepository = bRepo;
             commentRepository = cRepo;
+            rateRepository = rRepo;
+            newsRepository = nRepo;
         }
 
-        public ViewResult List(string search, int bookPage = 1) =>
+        public ViewResult List(string search, int page = 1) =>
             View(new BooksListViewModel
             {
                 Books = bookRepository.Books
                      .OrderBy(b => b.BookID)
                      .Where(b => search == null || b.Name.ToLower().Contains(search.ToLower()))
-                     .Skip((bookPage - 1) * PageSize)
+                     .Skip((page - 1) * PageSize)
                      .Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
-                    CurrentPage = bookPage,
+                    CurrentPage = page,
                     ItemsPerPage = PageSize,
                     TotalItems = search == null ?
                         bookRepository.Books.Count() :
@@ -45,6 +51,27 @@ namespace PAIS.Controllers
                 Book = bookRepository.GetBook(bookId),
                 Comments = commentRepository.Comments.Where(c => c.BookId == bookId)
             });
+
+        public ViewResult NewsList(string search, int page = 1) =>
+            View(new NewsListViewModel
+            {
+                NewsRepo = newsRepository.NewsRepo
+                 .OrderBy(n => n.Date)
+                 .Skip((page - 1) * PageSize)
+                 .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = search == null ?
+                     newsRepository.NewsRepo.Count() :
+                     newsRepository.NewsRepo.Where(e =>
+                        e.Name.Contains(search) || e.Author.Contains(search) || e.Description.Contains(search)).Count()
+                },
+                Search = search
+            });
+        public ViewResult NewsDetails(int newsID) =>
+            View(newsRepository.GetNews(newsID));
 
         [Authorize]
         [HttpPost]
@@ -99,6 +126,63 @@ namespace PAIS.Controllers
             Comment comment = commentRepository.DeleteComment(commentId);
 
             return RedirectToAction("Details", "Home", new { bookId = comment.BookId });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult RateBook(Rate rate)
+        {
+            if (string.IsNullOrEmpty(rate.UserId) || rate.BookId == 0 || rate.Value < 1 || rate.Value > 5)
+            {
+                RedirectToAction("Error");
+            }
+            Book bookTORate = bookRepository.GetBook(rate.BookId);
+            if (bookTORate == null)
+            {
+                return RedirectToAction("Error");
+            }
+            Rate yourRate = new Rate
+            {
+                BookId = rate.BookId,
+                UserId = rate.UserId,
+                Value = rate.Value
+            };
+
+            List<Rate> allRates = rateRepository.Rates.ToList();
+            if (allRates != null)
+            {
+                bool isFinded = false;
+                foreach (var r in allRates)
+                {
+                    if (r.BookId == rate.BookId && r.UserId == rate.UserId)
+                    {
+                        isFinded = true;
+                        yourRate.RateId = r.RateId;
+                        bookTORate.Rate += (yourRate.Value - r.Value) / bookTORate.RatesAmount;
+                        rateRepository.SaveRate(yourRate);
+                        bookRepository.SaveBook(bookTORate);
+                        break;
+                    }
+                }
+                if (!isFinded)
+                {
+                    uint amount = bookTORate.RatesAmount;
+                    bookTORate.RatesAmount++;
+                    bookTORate.Rate = (bookTORate.Rate * amount + yourRate.Value) / bookTORate.RatesAmount;
+                    bookRepository.SaveBook(bookTORate);
+                    rateRepository.SaveRate(yourRate);
+                }
+            }
+            else
+            {
+                uint amount = bookTORate.RatesAmount;
+                bookTORate.RatesAmount++;
+                bookTORate.Rate = (bookTORate.Rate * amount + yourRate.Value) / bookTORate.RatesAmount;
+                bookRepository.SaveBook(bookTORate);
+                rateRepository.SaveRate(yourRate);
+            }
+
+            return RedirectToAction("Details", "Home", new { bookId = bookTORate.BookID });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

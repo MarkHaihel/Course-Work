@@ -47,5 +47,8 @@ namespace PAIS.Models.ViewModels
         [Range(0.01, double.MaxValue,
             ErrorMessage = "Вкажіть ціну")]
         public decimal Price { get; set; }
+
+        public decimal Rate { get; set; }
+        public uint RatesAmount { get; set; }
     }
 }
