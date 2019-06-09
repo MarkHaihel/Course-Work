@@ -8,8 +8,7 @@ namespace PAIS.Models.ViewModels
     {
         public int BookID { get; set; }
 
-        //[Required(ErrorMessage = "Виберіть файл")]
-        //public IFormFile Image { get; set; }
+        public IFormFile Image { get; set; }
 
         [Required(ErrorMessage = "Введіть назву книги")]
         public string Name { get; set; }

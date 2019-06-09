@@ -1,25 +1,29 @@
 ﻿@model Book
 
-<div class="card card-outline-primary m-1 p-1">
+<div class="card card-outline-primary m-1 p-2">
+    <div class="d-flex flex-column">
+        <img class="mx-auto p-2" style="width:200px; height:280px;" alt="@Model.Name" src="data:image/jpeg;base64,@(Convert.ToBase64String(@Model.Image))" />
+    </div>
     <div class="bg-faded p-1">
         <h4>
             <a style="text-decoration: none;" asp-controller="Home" asp-action="Details" asp-route-bookId="@Model.BookID">@Model.Name</a>
-            <span class="badge badge-pill badge-primary" style="float:right">
-                <small>@Model.Price.ToString("c")</small>
-            </span>
         </h4>
     </div>
-    <div class="card-text p-1">@Model.Description</div>
-    <form id="@Model.BookID" asp-action="AddToCart"
-          asp-controller="Cart" method="post">
-        <input type="hidden" asp-for="BookID" />
-        <input type="hidden" name="returnUrl"
-               value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-        <span class="card-text p-1">
-            <button type="submit"
-                    class="btn btn-success btn-sm pull-right" style="float:right">
-                В корзину
-            </button>
+    <div class="row p-3">
+        <span class="badge badge-primary col-3 pull-left">
+            @Model.Price.ToString("c")
         </span>
-    </form>
+        <form class="col-9" id="@Model.BookID" asp-action="AddToCart"
+              asp-controller="Cart" method="post">
+            <input type="hidden" asp-for="BookID" />
+            <input type="hidden" name="returnUrl"
+                   value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <span class="card-text p-1">
+                <button type="submit"
+                        class="btn btn-success btn-sm pull-right" style="float:right">
+                    В корзину
+                </button>
+            </span>
+        </form>
+    </div>
 </div>

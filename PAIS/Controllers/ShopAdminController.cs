@@ -70,13 +70,21 @@ namespace PAIS.Controllers
                     Rate = model.Rate,
                     RatesAmount = model.RatesAmount
                 };
-                //byte[] imageData = null;
-                //using (var binaryReader = new BinaryReader(model.Image.OpenReadStream()))
-                //{
-                //    imageData = binaryReader.ReadBytes((int)model.Image.Length);
-                //}
-                //newBook.Image = imageData;
-                newBook.Image = new byte[] { 3, 10, 8, 25 };
+                if (model.Image != null)
+                {
+                    byte[] imageData = null;
+                    using (var binaryReader = new BinaryReader(model.Image.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)model.Image.Length);
+                    }
+                    newBook.Image = imageData;
+                }
+                else
+                {
+                    return RedirectToAction("Error");
+                }
+
+                //newBook.Image = new byte[] { 3, 10, 8, 25 };
 
                 bookRepository.SaveBook(newBook);
                 TempData["message"] = $"{newBook.Name} has been saved";

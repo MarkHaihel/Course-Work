@@ -16,6 +16,7 @@
             }
             @if (await UserManager.IsInRoleAsync((await UserManager.GetUserAsync(User)), "shop admin"))
             {
+                <a class="dropdown-item" href="/Order/List" title="Orders">Замовлення <span style="color:orangered;">(А)</span></a>
                 <a class="dropdown-item" href="/NewsAdmin/Index" title="News">Новини <span style="color:orangered;">(А)</span></a>
                 <a class="dropdown-item" href="/ShopAdmin/Index" title="Books">Товари <span style="color:orangered;">(А)</span></a>
             }

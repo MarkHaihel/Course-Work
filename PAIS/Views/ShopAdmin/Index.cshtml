@@ -5,7 +5,21 @@
 }
 
 <h2 class="p-1">Всі книги</h2>
-
+<hr />
+<div class="d-flex justify-content-center">
+    <div class="col-8 mt-3">
+        <form asp-action="Search" asp-controller="Home">
+            <div class="row">
+                <div class="col-lg-11 p-0">
+                    <input type="text" class="form-control border-primary w-100 my-0" id="userSearch" placeholder="Пошук книги" name="req">
+                </div>
+                <div class="col-lg-1 p-0">
+                    <button type="submit" class="btn btn-primary my-0"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="p-1" style="margin-bottom:5px;">
     <a asp-action="Create" style="text-decoration: none;" class="btn btn-sm btn-link">Добавити книгу</a>
 </div>

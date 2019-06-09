@@ -1,6 +1,6 @@
 ﻿@model News
 
-<div class="card card-outline-primary p-2 col-lg-8">
+<div class="card card-outline-primary p-2 mb-2 col-lg-12">
         <div>
             <h3><a class="text-decoration-none" asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@Model.NewsID">@Model.Name</a></h3>
             <p>@Model.Date.ToString("MM/dd/yyyy") @Model.Author</p>

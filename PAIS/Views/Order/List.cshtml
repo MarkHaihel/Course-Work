@@ -1,14 +1,15 @@
 ﻿@model IEnumerable<Order>
 
 @{
-    ViewBag.Title = "Orders";
-    Layout = "_AdminLayout";
+    ViewBag.Title = "Замовлення";
+    Layout = "_Layout";
 }
-
 @if (Model.Count() > 0)
 {
+    <h4>Замовлення</h4>
+    <hr />
     <table class="table table-bordered table-striped">
-        <tr><th>Name</th><th>Zip</th><th colspan="2">Details</th><th></th></tr>
+        <tr><th>ПІБ</th><th>Zip</th><th colspan="2">Деталі</th><th></th></tr>
         @foreach (Order o in Model)
         {
             <tr>
@@ -20,7 +21,7 @@
                     <form asp-action="MarkShipped" method="post">
                         <input type="hidden" name="orderId" value="@o.OrderID" />
                         <button type="submit" class="btn btn-sm btn-danger">
-                            Ship
+                            Відправити
                         </button>
                     </form>
                 </td>
@@ -40,5 +41,7 @@
 
 else
 {
-    <div class="text-center">No Unshipped Orders</div>
+    <div class="text-center">
+        <h4>Немає відправлених замовлень</h4>
+    </div>
 }

@@ -15,7 +15,7 @@ namespace PAIS.Controllers
         private IRateRepository rateRepository;
         private ICommentRepository commentRepository;
         private INewsRepository newsRepository;
-        public int PageSize = 6;
+        public int PageSize = 4;
 
         public HomeController(IBookRepository bRepo, ICommentRepository cRepo, IRateRepository rRepo
             ,INewsRepository nRepo)

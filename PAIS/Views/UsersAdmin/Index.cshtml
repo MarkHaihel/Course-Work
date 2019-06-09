@@ -1,6 +1,4 @@
-﻿@*@using PAIS.Filters;*@
-
-@model IEnumerable<IdentityUser>
+﻿@model IEnumerable<IdentityUser>
 @addTagHelper "*, PAIS"
 @{
     ViewData["Title"] = "Список Користувачів";
@@ -13,40 +11,29 @@
 
 <h2 class="p-1">Список користувачів</h2>
 <hr />
-<form method="get">
-    <div class="d-flex">
-        <div class="col-lg-6 mt-5">
-            <div class="col-lg-11 p-0">
-                @*@Html.TextBox("searchReq", Model.UsersFilterVM.SearchReq, htmlAttributes: new { @class = "form-control border-primary w-100 h1 my-0 form-control-lg", @placeholder = "Search book" })*@
+<div class="d-flex justify-content-center">
+    <div class="col-8 mt-3">
+        <form asp-action="Search" asp-controller="Home">
+            <div class="row">
+                <div class="col-lg-11 p-0">
+                    <input type="text" class="form-control border-primary w-100 my-0" id="userSearch" placeholder="Пошук користувача" name="req">
+                </div>
+                <div class="col-lg-1 p-0">
+                    <button type="submit" class="btn btn-primary my-0"><i class="fa fa-search"></i></button>
+                </div>
             </div>
-            <div class="col-lg-1 p-0">
-                <button type="submit" class="btn btn-primary my-0 form-control-lg"><i class="fas fa-search"></i></button>
-            </div>
-        </div>
+        </form>
     </div>
-</form>
+</div>
 <table class="table mt-5">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th>
-                <sort-header action="Index"
-                             @*up="@Model.UsersSortVM.Up"
-                             current="@Model.UsersSortVM.Current"
-                             property="@Model.UsersSortVM.LoginNameSort"
-                             page-url-searchReq="@(Model.UsersFilterVM.SearchReq)"*@>
-                    Логін
-                </sort-header>
-
+            <th scope="row">
+                Логін
             </th>
-            <th>
-                <sort-header action="Index"
-                             @*up="@Model.UsersSortVM.Up"
-                             current="@Model.UsersSortVM.Current"
-                             property="@Model.UsersSortVM.EmailSort"
-                             page-url-searchReq="@(Model.UsersFilterVM.SearchReq)"*@>
-                    Email
-                </sort-header>
+            <th scope="row">
+                Email
 
             </th>
             <th scope="col">Роль</th>

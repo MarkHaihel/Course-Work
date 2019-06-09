@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace PAIS.Controllers
 {
+    [Authorize(Roles = "shop admin")]
     public class OrderController : Controller
     {
         private IOrderRepository repository;

@@ -11,7 +11,7 @@
     <div class="input-group mb-3">
         @foreach (IdentityRole role in Model.AllRoles)
         {
-            <div class="d-flex mb-3">
+            <div class="d-flex mb-3 col-lg-4">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <input type="radio" name="roles" value="@role.Name"
@@ -19,7 +19,7 @@
                         <span class="checkmark"></span>
                     </div>
                 </div>
-                <label class="form-control">@role.Name</label>
+                <label class="form-control-lg form-control m-0">@role.Name</label>
             </div>
         }
     </div>

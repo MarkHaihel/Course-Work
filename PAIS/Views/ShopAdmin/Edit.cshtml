@@ -10,18 +10,18 @@
 
 <hr />
 
-    <form asp-action="Edit" style="padding:0px;" method="post" class="col-md-6 col-lg-5">
+    <form asp-action="Edit" style="padding:0px;" method="post" class="col-md-6 col-lg-5" enctype="multipart/form-data">
         <input type="hidden" asp-for="BookID" />
         <div class="form-group">
             <label asp-for="Name">Назва книги</label>
             <div><span asp-validation-for="Name" class="text-danger"></span></div>
             <input asp-for="Name" class="form-control" />
         </div>
-        @*<div>
+       <div>
             <label asp-for="Image">Зображення</label>
             <div><span asp-validation-for="Image" class="text-danger"></span></div>
-            <input asp-for="Image" type="file" class="form-control-file border"/>
-        </div>*@
+            <input type="file" asp-for="Image" class="form-control-file border"/>
+        </div>
         <div class="form-group">
             <label asp-for="Description">Опис</label>
             <div><span asp-validation-for="Description" class="text-danger"></span></div>

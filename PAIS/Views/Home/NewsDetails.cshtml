@@ -1,16 +1,76 @@
 ﻿@model News
+
+@inject INewsRepository newsRepository
+
 <h2 class="p-1">Новини</h2>
 <hr />
-<div class="card card-outline-primary p-2 col-lg-8">
-    <div>
-        <h3>@Model.Name</h3>
-        <p>@Model.Date.ToString("MM/dd/yyyy") @Model.Author</p>
-    </div>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card card-outline-primary p-2 ">
+            <div>
+                <h3>@Model.Name</h3>
+                <p>@Model.Date.ToString("MM/dd/yyyy") @Model.Author</p>
+            </div>
 
-    <div class="card-text p-1">
-        @Model.Description;
+            <div class="card-text p-1">
+                @Model.Description;
+            </div>
+            <a asp-action="NewsList" asp-controller="Home">
+                <span class="btn btn-outline-primary pull-right">Назад</span>
+            </a>
+        </div>
     </div>
-    <a asp-action="NewsList" asp-controller="Home">
-        <span class="btn btn-outline-primary pull-right">Назад</span>
-    </a>
+    <div class="col-lg-4 card p-3">
+        <div>
+            <h4>
+                <span>Пошук</span>
+            </h4>
+        </div>
+        <hr />
+        <div>
+            <form asp-controller="Home" asp-action="NewsList" method="get">
+                <div class="row pr-4 pl-3">
+                    <div class="col-lg-11 p-0">
+                        <input type="text" aria-label="Search" class="form-control border-primary w-100 my-0" name="search" placeholder="Пошук новини">
+                    </div>
+                    <div class="col-lg-1 p-0">
+                        <button type="submit" class="btn btn-primary my-0"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <hr />
+        <div>
+            <h4>
+                <span>Популярні</span>
+            </h4>
+        </div>
+        <hr />
+        @foreach (News n in newsRepository.NewsRepo.AsQueryable()
+  .OrderByDescending(n => n.Count)
+  .Skip(Math.Max(0, newsRepository.NewsRepo.AsQueryable().Count() - 3)))
+        {
+            <div>
+                <a asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@n.NewsID">
+                    @n.Name
+                </a>
+                <p class="small">@n.Date.ToString("MM/dd/yyyy") @n.Author</p>
+            </div>
+        }
+
+        <hr />
+        <h4>
+            <span>Останні</span>
+        </h4>
+        <hr />
+        @foreach (News n in newsRepository.LastNews())
+        {
+            <div>
+                <a asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@n.NewsID">
+                    @n.Name
+                </a>
+                <p class="small">@n.Date.ToString("MM/dd/yyyy") @n.Author</p>
+            </div>
+        }
+    </div>
 </div>
