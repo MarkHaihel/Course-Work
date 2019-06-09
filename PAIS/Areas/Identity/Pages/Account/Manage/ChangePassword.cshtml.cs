@@ -92,7 +92,7 @@ namespace PAIS.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation("Користувач успішно змінив пароль.");
-            StatusMessage = "Ваш пароль було змінити";
+            StatusMessage = "Ваш пароль було змінено";
 
             return RedirectToPage();
         }

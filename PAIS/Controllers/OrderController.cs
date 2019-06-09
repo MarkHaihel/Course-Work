@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace PAIS.Controllers
 {
-    [Authorize(Roles = "shop admin")]
     public class OrderController : Controller
     {
         private IOrderRepository repository;
@@ -17,12 +16,12 @@ namespace PAIS.Controllers
             cart = cartService;
         }
 
-        [Authorize]
+        [Authorize(Roles = "shop admin")]
         public ViewResult List() =>
             View(repository.Orders.Where(o => !o.Shipped));
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "shop admin")]
         public IActionResult MarkShipped(int orderID)
         {
             Order order = repository.Orders

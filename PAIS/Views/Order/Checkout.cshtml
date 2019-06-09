@@ -1,44 +1,47 @@
 ﻿@model Order
 
-<h2>Оформити замовлення</h2>
-<p>Введіть свої дані, і ми доставимо ваш товар!</p>
+    <div class="col-5">
+        <h2>Оформити замовлення</h2>
+        <p>Введіть свої дані, і ми доставимо ваш товар!</p>
 
-<div asp-validation-summary="All" class="text-danger"></div>
+        <div asp-validation-summary="All" class="text-danger"></div>
 
-<form asp-action="Checkout" method="post">
-    <h3>Відправити до</h3>
-    <div class="form-group">
-        <label>ПІБ:</label><input asp-for="Name" class="form-control" />
+        <form asp-action="Checkout" method="post">
+            <h3>Відправити до</h3>
+            <div class="form-group">
+                <label>ПІБ:</label><input asp-for="Name" class="form-control" />
+            </div>
+            <h3>Адреса</h3>
+            <div class="form-group">
+                <label>Адреса 1:</label><input asp-for="Line1" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Адреса 2:</label><input asp-for="Line2" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Адреса 3:</label><input asp-for="Line3" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Місто:</label><input asp-for="City" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Область:</label><input asp-for="State" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Zip:</label><input asp-for="Zip" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Країна:</label><input asp-for="Country" class="form-control" />
+            </div>
+            <h3>Опції</h3>
+            <div class="checkbox">
+                <label>
+                    <input asp-for="GiftWrap" /> Упакувати як подарунок
+                </label>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary" type="submit" value="Завершити замовлення" />
+            </div>
+        </form>
+
     </div>
-    <h3>Адреса</h3>
-    <div class="form-group">
-        <label>Стрічка 1:</label><input asp-for="Line1" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Стрічка 2:</label><input asp-for="Line2" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Стрічка 3:</label><input asp-for="Line3" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Місто:</label><input asp-for="City" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Область:</label><input asp-for="State" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Zip:</label><input asp-for="Zip" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Країна:</label><input asp-for="Country" class="form-control" />
-    </div>
-    <h3>Опції</h3>
-    <div class="checkbox">
-        <label>
-            <input asp-for="GiftWrap" /> Упакувати як подарунок
-        </label>
-    </div>
-    <div class="text-center">
-        <input class="btn btn-primary" type="submit" value="Завершити замовлення" />
-    </div>
-</form>
