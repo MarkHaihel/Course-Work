@@ -87,7 +87,7 @@ namespace PAIS.Controllers
                 //newBook.Image = new byte[] { 3, 10, 8, 25 };
 
                 bookRepository.SaveBook(newBook);
-                TempData["message"] = $"{newBook.Name} has been saved";
+                TempData["message"] = $"{newBook.Name} був збережений";
                 return RedirectToAction("Index");
             }
             else
@@ -109,7 +109,7 @@ namespace PAIS.Controllers
 
             if (deletetBook != null)
             {
-                TempData["message"] = $"{deletetBook.Name} was deleted";
+                TempData["message"] = $"{deletetBook.Name} був видалений";
             }
 
             return RedirectToAction("Index");

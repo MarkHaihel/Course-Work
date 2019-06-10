@@ -45,6 +45,10 @@ namespace PAIS.Controllers
                 },
                 Search = search
             });
+
+        public ViewResult Contact() =>
+            View();
+
         public ViewResult Details(int bookId) =>
             View(new BookCommentsViewModel
             {

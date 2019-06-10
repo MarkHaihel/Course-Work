@@ -5,12 +5,13 @@
 }
 
 <h2 class="p-1">Всі новини</h2>
+@(await Html.PartialAsync("StatusMessage", TempData["message"]))
 <div class="d-flex justify-content-center">
     <div class="col-8 mt-3">
         <form asp-action="Search" asp-controller="Home">
             <div class="row">
                 <div class="col-lg-11 p-0">
-                    <input type="text" class="form-control border-primary w-100 my-0" id="userSearch" placeholder="Пошук книги" name="req">
+                    <input type="text" class="form-control border-primary w-100 my-0" id="userSearch" placeholder="Пошук новини" name="req">
                 </div>
                 <div class="col-lg-1 p-0">
                     <button type="submit" class="btn btn-primary my-0"><i class="fa fa-search"></i></button>

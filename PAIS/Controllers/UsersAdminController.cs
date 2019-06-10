@@ -66,6 +66,7 @@ namespace PAIS.Controllers
                     var result = await userManager.UpdateAsync(user);
                     if (result.Succeeded)
                     {
+                        TempData["message"] = $"{user.UserName} був змінений";
                         return RedirectToAction("Index");
                     }
                     else
@@ -99,6 +100,7 @@ namespace PAIS.Controllers
             commentRepository.DeleteUserComments(id);
             rateRepository.DeleteUserRates(id);
 
+            TempData["message"] = $"Користувач {user.UserName} видалений";
             return RedirectToAction("Index");
         }
 
@@ -145,6 +147,7 @@ namespace PAIS.Controllers
 
                 await userManager.RemoveFromRolesAsync(user, removedRoles);
 
+                TempData["message"] = $"Роль користувача {user.UserName} була змінена";
                 return RedirectToAction("Index");
             }
 
@@ -174,6 +177,7 @@ namespace PAIS.Controllers
             string id = blockedUserRepository.BlockedUsers.First(u => u.UserId == UserId).UserId;
             blockedUserRepository.DeleteBlockedUser(id);
 
+            TempData["message"] = $"Користувач з {id} був розблокований";
             return RedirectToAction("Index");
         }
 

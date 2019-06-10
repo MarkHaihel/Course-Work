@@ -5,15 +5,15 @@
         <img class="mx-auto p-2" style="width:200px; height:280px;" alt="@Model.Name" src="data:image/jpeg;base64,@(Convert.ToBase64String(@Model.Image))" />
     </div>
     <div class="bg-faded p-1">
-        <h4>
-            <a style="text-decoration: none;" asp-controller="Home" asp-action="Details" asp-route-bookId="@Model.BookID">@Model.Name</a>
+        <h4 class="text-center">
+            ISBN :<a class="text-decoration-none" asp-controller="Home" asp-action="Details" asp-route-bookId="@Model.BookID">@Model.ISBNCode</a>
         </h4>
     </div>
     <div class="row p-3">
-        <span class="badge badge-primary col-3 pull-left">
+        <span class="badge badge-success p-2 col-4 pull-left">
             @Model.Price.ToString("c")
         </span>
-        <form class="col-9" id="@Model.BookID" asp-action="AddToCart"
+        <form class="col-8" id="@Model.BookID" asp-action="AddToCart"
               asp-controller="Cart" method="post">
             <input type="hidden" asp-for="BookID" />
             <input type="hidden" name="returnUrl"

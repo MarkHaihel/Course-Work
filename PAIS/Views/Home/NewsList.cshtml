@@ -11,100 +11,99 @@
 
 @if (Model.NewsRepo.Count() != 0)
 {
-    <div class="row">
-
-        <div class="col-lg-8">
-            <div>
-                @{ bool isEmpty = Model.NewsRepo
-                     .Where(n => Model.Search == null ||
-                     n.Name.IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-                     n.Author.IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-                     n.Description.IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-                     n.Date.ToString().IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0).Any(); }
-                @foreach (var n in Model.NewsRepo
-                   .Where(n => Model.Search == null ||
-                   n.Name.IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-                   n.Author.IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-                   n.Description.IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-                   n.Date.ToString().IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0))
-                {
-                    @await Html.PartialAsync("NewsSummary", n)
-                }
-                @if (!isEmpty)
-                {
-                    <div class="text-center">
-                        <h2>За пошуком: @Model.Search новин не знайдено!</h2>
-                    </div>
-                }
-            </div>
-
-            <div style="height: 20px;"></div>
-
-            <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
-                 page-class="btn" page-class-normal="btn-secondary"
-                 page-class-selected="btn-primary" page-url-category="@Model.Search"
-                 class="btn-group pull-left m-1">
-            </div>
-
-        </div>
-
-        <div class="col-lg-4 card p-3">
-            <div>
-                <h4>
-                    <span>Пошук</span>
-                </h4>
-            </div>
-            <hr />
-            <div>
-                <form asp-controller="Home" asp-action="NewsList" method="get">
-                    <div class="row pr-4 pl-3">
-                        <div class="col-lg-11 p-0">
-                            <input type="text" aria-label="Search" class="form-control border-primary w-100 my-0" name="search" placeholder="Пошук новини">
-                        </div>
-                        <div class="col-lg-1 p-0">
-                            <button type="submit" class="btn btn-primary my-0"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <hr />
-            <div>
-                <h4>
-                    <span>Популярні</span>
-                </h4>
-            </div>
-            <hr />
-            @foreach (News n in Model.NewsRepo.AsQueryable()
-  .OrderByDescending(n => n.Count)
-  .Skip(Math.Max(0, Model.NewsRepo.AsQueryable().Count() - 3)))
-            {
-                <div>
-                    <a asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@n.NewsID">
-                        @n.Name
-                    </a>
-                    <p class="small">@n.Date.ToString("MM/dd/yyyy") @n.Author</p>
-                </div>
-            }
-
-            <hr />
+<div class="row">
+    <div class="col-lg-4 order-lg-2 card p-3">
+        <div>
             <h4>
-                <span>Останні</span>
+                <span>Пошук</span>
             </h4>
-            <hr />
-            @foreach (News n in Model.NewsRepo.AsQueryable()
-  .OrderBy(n => n.Date)
-  .Skip(Math.Max(0, Model.NewsRepo.AsQueryable().Count() - 5)))
+        </div>
+        <hr />
+        <div>
+            <form asp-controller="Home" asp-action="NewsList" method="get">
+                <div class="row pr-4 pl-3">
+                    <div class="col-lg-11 p-0">
+                        <input type="text" aria-label="Search" class="form-control border-primary w-100 my-0" name="search" placeholder="Пошук новини">
+                    </div>
+                    <div class="col-lg-1 p-0">
+                        <button type="submit" class="btn btn-primary my-0"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <hr />
+        <div>
+            <h4>
+                <span>Популярні</span>
+            </h4>
+        </div>
+        <hr />
+        @foreach (News n in Model.NewsRepo.AsQueryable()
+.OrderByDescending(n => n.Count)
+.Skip(Math.Max(0, Model.NewsRepo.AsQueryable().Count() - 3)))
+        {
+            <div>
+                <a asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@n.NewsID">
+                    @n.Name
+                </a>
+                <p class="small">@n.Date.ToString("MM/dd/yyyy") @n.Author</p>
+            </div>
+        }
+
+        <hr />
+        <h4>
+            <span>Останні</span>
+        </h4>
+        <hr />
+        @foreach (News n in Model.NewsRepo.AsQueryable()
+.OrderBy(n => n.Date)
+.Skip(Math.Max(0, Model.NewsRepo.AsQueryable().Count() - 5)))
+        {
+            <div>
+                <a asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@n.NewsID">
+                    @n.Name
+                </a>
+                <p class="small">@n.Date.ToString("MM/dd/yyyy") @n.Author</p>
+            </div>
+        }
+    </div>
+
+    <div class="col-lg-8 order-lg-1">
+        <div>
+            @{ bool isEmpty = Model.NewsRepo
+                    .Where(n => Model.Search == null ||
+                    n.Name.IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+                    n.Author.IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+                    n.Description.IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+                    n.Date.ToString().IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0).Any(); }
+            @foreach (var n in Model.NewsRepo
+            .Where(n => Model.Search == null ||
+            n.Name.IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+            n.Author.IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+            n.Description.IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+            n.Date.ToString().IndexOf(Model.Search, StringComparison.CurrentCultureIgnoreCase) >= 0))
             {
-                <div>
-                    <a asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@n.NewsID">
-                        @n.Name
-                    </a>
-                    <p class="small">@n.Date.ToString("MM/dd/yyyy") @n.Author</p>
+                @await Html.PartialAsync("NewsSummary", n)
+            }
+            @if (!isEmpty)
+            {
+                <div class="text-center">
+                    <h2>За пошуком: @Model.Search новин не знайдено!</h2>
                 </div>
             }
         </div>
 
-    </div> 
+        <div style="height: 20px;"></div>
+
+        <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
+             page-class="btn" page-class-normal="btn-secondary"
+             page-class-selected="btn-primary" page-url-category="@Model.Search"
+             class="btn-group pull-left m-1">
+        </div>
+
+    </div>
+
+</div> 
 }
 else
 {

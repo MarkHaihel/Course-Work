@@ -15,13 +15,13 @@
             <tr>
                 <td>@o.Name</td>
                 <td>@o.Zip</td>
-                <th>Product</th>
-                <th>Quantity</th>
+                <th>Товари</th>
+                <th>КІлькість</th>
                 <td>
                     <form asp-action="MarkShipped" method="post">
                         <input type="hidden" name="orderId" value="@o.OrderID" />
                         <button type="submit" class="btn btn-sm btn-danger">
-                            Відправити
+                            Видалити
                         </button>
                     </form>
                 </td>
