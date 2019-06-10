@@ -34,7 +34,7 @@ namespace PAIS.Controllers
             if (ModelState.IsValid)
             {
                 repository.SaveNews(model);
-                TempData["message"] = $"{model.Name} has been saved";
+                TempData["message"] = $"Новину: {model.Name} було збережено";
                 return RedirectToAction("Index");
             }
             else
@@ -53,7 +53,7 @@ namespace PAIS.Controllers
 
             if (deletedNews != null)
             {
-                TempData["message"] = $"{deletedNews.Name} was deleted";
+                TempData["message"] = $"Новину: {deletedNews.Name} було видалено";
             }
 
             return RedirectToAction("Index");

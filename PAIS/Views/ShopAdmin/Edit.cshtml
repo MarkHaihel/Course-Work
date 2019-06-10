@@ -72,6 +72,10 @@
             <div><span asp-validation-for="Price" class="text-danger"></span></div>
             <input asp-for="Price" class="form-control" />
         </div>
+        
+        <input type="number" asp-for="Rate" hidden />
+        <input type="number" asp-for="RatesAmount" hidden />
+
         <div>
             <button class="btn btn-outline-dark" type="submit">Зберегти</button>
             <a asp-action="Index" class="btn btn-link">Відмінити</a>
