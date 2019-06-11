@@ -1,1 +1,24 @@
-﻿
+﻿@model FeedBack
+
+@{
+    ViewBag.Title = "Контакти";
+    Layout = "_Layout";
+}
+
+<h2>Контакти</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-12 col-lg-8 p-3">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1005.5450572028439!2d24.0232939!3d49.839723000000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473add717532cff9%3A0x1ea627f45b408179!2z0JvRjNCy0ZbQstGB0YzQutC40Lkg0L3QsNGG0ZbQvtC90LDQu9GM0L3QuNC5INGD0L3RltCy0LXRgNGB0LjRgtC10YIg0ZbQvNC10L3RliDQhtCy0LDQvdCwINCk0YDQsNC90LrQsA!5e0!3m2!1suk!2sua!4v1560275009253!5m2!1suk!2sua"
+                height="520" frameborder="0" style="border: 1px solid rgba(0,0,0,.125); border-radius: 2px; width:100%;" allowfullscreen></iframe>
+    </div>
+    <div class="col-md-12 col-lg-4 p-3 card border-0">
+        <div><h4>Наша Адреса:</h4></div>
+        <p class="text-center">79000, Львівська область,  Львів,  вулиця Університетська, 1</p>
+        <div><h4>Графік роботи:</h4></div>
+        <p class="text-center">Понеділо - п'ятниця<br /> з 9.00 до 18.00<br />Вихідний - субота, неділя</p>
+        <div><h4>Зв'яжіться з нами:</h4></div>
+        @await Html.PartialAsync("FeedBack", Model)
+    </div>
+</div>

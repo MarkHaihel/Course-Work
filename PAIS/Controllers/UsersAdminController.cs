@@ -31,12 +31,12 @@ namespace PAIS.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string search = "")
         {
             List<IdentityUser> Users = new List<IdentityUser>();
             Users = userManager.Users.ToList();
 
-            return View(Users);
+            return View(Users.Where(u => u.UserName.Contains(search)));
         }
 
         [HttpGet]

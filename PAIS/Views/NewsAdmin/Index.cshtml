@@ -8,10 +8,10 @@
 @(await Html.PartialAsync("StatusMessage", TempData["message"]))
 <div class="d-flex justify-content-center">
     <div class="col-8 mt-3">
-        <form asp-action="Search" asp-controller="Home">
+        <form asp-action="Index" asp-controller="NewsAdmin" method="get">
             <div class="row">
                 <div class="col-lg-11 p-0">
-                    <input type="text" class="form-control border-primary w-100 my-0" id="userSearch" placeholder="Пошук новини" name="req">
+                    <input type="text" class="form-control border-primary w-100 my-0" placeholder="Пошук новини" name="search">
                 </div>
                 <div class="col-lg-1 p-0">
                     <button type="submit" class="btn btn-primary my-0"><i class="fa fa-search"></i></button>

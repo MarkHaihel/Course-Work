@@ -1,0 +1,20 @@
+﻿@model FeedBack
+
+<form asp-controller="Home" asp-action="SendMessage" method="post">
+    <div>
+        <div class="form-group">
+            <div><span asp-validation-for="Name" class="text-danger"></span></div>
+            <input asp-for="Name" type="text" class="form-control" placeholder="Ім'я" required>
+        </div>
+        <div class="form-group">
+            <div><span asp-validation-for="Name" class="text-danger"></span></div>
+            <input asp-for="Mail" type="email" class="form-control" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <div><span asp-validation-for="Name" class="text-danger"></span></div>
+            <input asp-for="Subject" type="text" class="form-control" placeholder="Тема" required>
+        </div>
+        <textarea asp-for="Message" class="form-control" placeholder="Повідомлення" required></textarea>
+        <button type="submit" class=" pull-right btn btn-success btn-sm mt-2">Надіслати</button>
+    </div>
+</form>

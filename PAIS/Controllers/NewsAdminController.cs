@@ -18,7 +18,7 @@ namespace PAIS.Controllers
             repository = repo;
         }
 
-        public ViewResult Index() => View(repository.NewsRepo);
+        public ViewResult Index(string search = "") => View(repository.NewsRepo.Where(n => n.Name.Contains(search)));
 
         public ViewResult Edit(int newsID)
         {

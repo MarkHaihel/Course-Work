@@ -46,8 +46,20 @@ namespace PAIS.Controllers
                 Search = search
             });
 
-        public ViewResult Contact() =>
+        public ViewResult About() =>
             View();
+
+        public ViewResult Contacts() =>
+            View(new FeedBack());
+
+        [HttpPost]
+        public IActionResult SendMessage(FeedBack feedBack)
+        {
+            SendMail sendMail = new SendMail(feedBack);
+            sendMail.SendFeedBack();
+
+            return RedirectToAction("Contacts");
+        }
 
         public ViewResult Details(int bookId) =>
             View(new BookCommentsViewModel

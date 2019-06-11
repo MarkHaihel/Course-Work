@@ -22,7 +22,7 @@ namespace PAIS.Controllers
             rateRepository = rRepo;
         }
 
-        public ViewResult Index() => View(bookRepository.Books);
+        public ViewResult Index(string search = "") => View(bookRepository.Books.Where(b => b.Name.Contains(search)));
 
         public ViewResult Edit(int bookId)
         {
