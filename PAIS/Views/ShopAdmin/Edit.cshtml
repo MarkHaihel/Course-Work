@@ -43,7 +43,7 @@
             <input asp-for="PublicationDate" type="number" class="form-control" />
         </div>
         <div class="form-group">
-            <label asp-for="PublicationType">Тип публікації</label>
+            <label asp-for="PublicationType">Тип видання</label>
             <div><span asp-validation-for="PublicationType" class="text-danger"></span></div>
             <input asp-for="PublicationType" class="form-control" />
         </div>
@@ -72,9 +72,6 @@
             <div><span asp-validation-for="Price" class="text-danger"></span></div>
             <input asp-for="Price" class="form-control" />
         </div>
-        
-        <input type="number" asp-for="Rate" hidden />
-        <input type="number" asp-for="RatesAmount" hidden />
 
         <div>
             <button class="btn btn-outline-dark" type="submit">Зберегти</button>

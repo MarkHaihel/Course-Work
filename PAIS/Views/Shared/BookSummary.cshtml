@@ -9,6 +9,8 @@
             <a class="text-decoration-none" asp-controller="Home" asp-action="Details" asp-route-bookId="@Model.BookID">@Model.Name</a>
         </p>
     </div>
+    
+    <p class="text-center">Рік: @Model.PublicationDate | Оцінка: @Model.Rate</p>
     <div class="row pl-4">
         <span class="badge badge-success p-2 col-4 pull-left">
             @Model.Price.ToString("c")

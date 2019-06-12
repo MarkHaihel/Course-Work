@@ -28,6 +28,7 @@
 <table class="table table-sm">
     <tr>
         <th>Назва</th>
+        <th>Тип видання</th>
         <th class="text-right">Ціна</th>
         <th class="text-center">Дії</th>
     </tr>
@@ -35,6 +36,7 @@
     {
         <tr>
             <td>@item.Name</td>
+            <td>@item.PublicationType</td>
             <td class="text-right">@item.Price.ToString("c")</td>
             <td class="text-center">
                 <form asp-action="Delete" method="post">

@@ -61,10 +61,18 @@ namespace PAIS.Models
             {
                 Rate dbEntry = context.Rates
                     .FirstOrDefault(p => p.RateId == c.RateId);
+                Book book = context.Books
+                    .FirstOrDefault(b => b.BookID == c.BookId);
 
                 if (dbEntry != null)
                 {
                     context.Rates.Remove(dbEntry);
+                }
+                if (book != null)
+                {
+                    uint amount = book.RatesAmount;
+                    book.RatesAmount--;
+                    book.Rate = (book.Rate * amount - c.Value) / book.RatesAmount;
                 }
             }
 

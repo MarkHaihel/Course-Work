@@ -26,17 +26,45 @@ namespace PAIS.Controllers
             newsRepository = nRepo;
         }
 
-        public ViewResult List(string search, string type, int page = 1)
+        public ViewResult List(string search, string type, int page = 1, SortEnum sortOrder = SortEnum.NAME_ASC)
         {
-            BooksListViewModel books = new BooksListViewModel() { Search = search, Type = type };
+            BooksListViewModel viewModel = new BooksListViewModel() { Search = search, Type = type };
+            viewModel.Books = bookRepository.Books;
+
+            switch (sortOrder)
+            {
+                case SortEnum.NAME_DESC:
+                    viewModel.Books = viewModel.Books.OrderByDescending(a => a.Name);
+                    break;
+                case SortEnum.YEAR_ASC:
+                    viewModel.Books = viewModel.Books.OrderBy(a => a.PublicationDate);
+                    break;
+                case SortEnum.YEAR_DESC:
+                    viewModel.Books = viewModel.Books.OrderByDescending(a => a.PublicationDate);
+                    break;
+                case SortEnum.PRICE_ASC:
+                    viewModel.Books = viewModel.Books.OrderBy(a => a.Price);
+                    break;
+                case SortEnum.PRICE_DESC:
+                    viewModel.Books = viewModel.Books.OrderByDescending(a => a.Price);
+                    break;
+                case SortEnum.RATE_ASC:
+                    viewModel.Books = viewModel.Books.OrderBy(a => a.Rate);
+                    break;
+                case SortEnum.RATE_DESC:
+                    viewModel.Books = viewModel.Books.OrderByDescending(a => a.Rate);
+                    break;
+                default:
+                    viewModel.Books = viewModel.Books.OrderBy(a => a.Name);
+                    break;
+            }
 
             if (search == null && type == null)
             {
-                books.Books = bookRepository.Books
-                     .OrderBy(b => b.BookID)
+                viewModel.Books = viewModel.Books
                      .Skip((page - 1) * PageSize)
                      .Take(PageSize);
-                books.PagingInfo = new PagingInfo
+                viewModel.PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
@@ -45,12 +73,11 @@ namespace PAIS.Controllers
             }
             else if (type == null)
             {
-                books.Books = bookRepository.Books
-                     .OrderBy(b => b.BookID)
+                viewModel.Books = viewModel.Books
                      .Where(b => b.Name.ToLower().Contains(search.ToLower()))
                      .Skip((page - 1) * PageSize)
                      .Take(PageSize);
-                books.PagingInfo = new PagingInfo
+                viewModel.PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
@@ -60,12 +87,11 @@ namespace PAIS.Controllers
             }
             else if (search == null)
             {
-                books.Books = bookRepository.Books
-                     .OrderBy(b => b.BookID)
+                viewModel.Books = viewModel.Books
                      .Where(b => b.PublicationType == type)
                      .Skip((page - 1) * PageSize)
                      .Take(PageSize);
-                books.PagingInfo = new PagingInfo
+                viewModel.PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
@@ -75,13 +101,12 @@ namespace PAIS.Controllers
             }
             else
             {
-                books.Books = bookRepository.Books
-                     .OrderBy(b => b.BookID)
+                viewModel.Books = viewModel.Books
                      .Where(b => b.PublicationType == type && 
                         b.Name.ToLower().Contains(search.ToLower()))
                      .Skip((page - 1) * PageSize)
                      .Take(PageSize);
-                books.PagingInfo = new PagingInfo
+                viewModel.PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
@@ -91,7 +116,9 @@ namespace PAIS.Controllers
                 };
             }
 
-            return View(books);
+            viewModel.BooksSortVM = new BooksSortViewModel(sortOrder);
+
+            return View(viewModel);
          }
 
         public ViewResult About() =>

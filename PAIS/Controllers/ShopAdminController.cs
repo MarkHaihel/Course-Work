@@ -26,8 +26,7 @@ namespace PAIS.Controllers
 
         public ViewResult Edit(int bookId)
         {
-            Book model = bookRepository.Books
-                   .FirstOrDefault(b => b.BookID == bookId);
+            Book model = bookRepository.GetBook(bookId);
 
             return View(new BookViewModel
             {
@@ -84,10 +83,8 @@ namespace PAIS.Controllers
                     return RedirectToAction("Error");
                 }
 
-                //newBook.Image = new byte[] { 3, 10, 8, 25 };
-
                 bookRepository.SaveBook(newBook);
-                TempData["message"] = $"{newBook.Name} був збережений";
+                TempData["message"] = $"{newBook.Name} була збережена";
                 return RedirectToAction("Index");
             }
             else
@@ -109,7 +106,7 @@ namespace PAIS.Controllers
 
             if (deletetBook != null)
             {
-                TempData["message"] = $"{deletetBook.Name} був видалений";
+                TempData["message"] = $"{deletetBook.Name} була видалена";
             }
 
             return RedirectToAction("Index");
