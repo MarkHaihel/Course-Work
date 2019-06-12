@@ -68,9 +68,9 @@ namespace PAIS.Infrastructure
                 TagBuilder tag = new TagBuilder("i");
 
                 if (Up == true)
-                    tag.AddCssClass("fas fa-chevron-up");
+                    tag.AddCssClass("fa fa-chevron-up");
                 else
-                    tag.AddCssClass("fas fa-chevron-down");
+                    tag.AddCssClass("fa fa-chevron-down");
                 output.PreContent.AppendHtml(tag);
             }
         }

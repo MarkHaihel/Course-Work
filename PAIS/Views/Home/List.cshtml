@@ -9,54 +9,51 @@
 {
     <h2 class="p-1">Видання</h2>
     <hr />
-    <table class="table mt-5">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">#</th>
-                
-                <th>
-                    <sort-header action="List"
-                                 up="@Model.BooksSortVM.Up"
-                                 current="@Model.BooksSortVM.Current"
-                                 property="@Model.BooksSortVM.NameSort">
-                        Name
-                    </sort-header>
-
-                </th>
-                <th>
-                    <sort-header action="List"
-                                 up="@Model.BooksSortVM.Up"
-                                 current="@Model.BooksSortVM.Current"
-                                 property="@Model.BooksSortVM.YearSort">
-                        Year
-                    </sort-header>
-
-                </th>
-                <th>
-                    <sort-header action="List"
-                                 up="@Model.BooksSortVM.Up"
-                                 current="@Model.BooksSortVM.Current"
-                                 property="@Model.BooksSortVM.RateSort">
-                        Rate
-                    </sort-header>
-
-                </th>
-                <th>
-                    <sort-header action="List"
-                                 up="@Model.BooksSortVM.Up"
-                                 current="@Model.BooksSortVM.Current"
-                                 property="@Model.BooksSortVM.PriceSort">
-                        Price
-                    </sort-header>
-
-                </th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-    </table>
+    
     <div>
         <div class="row">
-            <div class="col-sm-12 order-lg-1 order-2 col-lg-9 row  mt-3">
+            <div class="col-sm-12 order-lg-1 order-2 col-lg-9 border row p-0 mt-3">
+                <table class="table border">
+                        <tr class="text-center">
+                            <th>
+                                <sort-header action="List"
+                                             up="@Model.BooksSortVM.Up"
+                                             current="@Model.BooksSortVM.Current"
+                                             property="@Model.BooksSortVM.NameSort">
+                                    Name
+                                </sort-header>
+
+                            </th>
+                            <th>
+                                <sort-header action="List"
+                                             up="@Model.BooksSortVM.Up"
+                                             current="@Model.BooksSortVM.Current"
+                                             property="@Model.BooksSortVM.YearSort">
+                                    Year
+                                </sort-header>
+
+                            </th>
+                            <th>
+                                <sort-header action="List"
+                                             up="@Model.BooksSortVM.Up"
+                                             current="@Model.BooksSortVM.Current"
+                                             property="@Model.BooksSortVM.RateSort">
+                                    Rate
+                                </sort-header>
+
+                            </th>
+                            <th>
+                                <sort-header action="List"
+                                             up="@Model.BooksSortVM.Up"
+                                             current="@Model.BooksSortVM.Current"
+                                             property="@Model.BooksSortVM.PriceSort">
+                                    Price
+                                </sort-header>
+
+                            </th>
+                            <th scope="col"></th>
+                        </tr>
+                </table>
                 @foreach (Book b in Model.Books)
                 {
                     <div class="col-md-6 col-lg-4">
@@ -66,7 +63,7 @@
                 <div class="col-12">
                     <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
                          page-class="btn" page-class-normal="btn-secondary" page-url-type="@Model.Type"
-                         page-class-selected="btn-primary" page-url-search="@Model.Search" 
+                         page-class-selected="btn-primary" page-url-search="@Model.Search"
                          page-url-sortOrder="@(Model.BooksSortVM.Current)"
                          class="btn-group pull-right m-1 mr-4">
                     </div>
