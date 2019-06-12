@@ -15,10 +15,10 @@ namespace PAIS.Controllers
         private IRateRepository rateRepository;
         private ICommentRepository commentRepository;
         private INewsRepository newsRepository;
-        public int PageSize = 4;
+        public int PageSize = 3;
 
         public HomeController(IBookRepository bRepo, ICommentRepository cRepo, IRateRepository rRepo
-            ,INewsRepository nRepo)
+            , INewsRepository nRepo)
         {
             bookRepository = bRepo;
             commentRepository = cRepo;
@@ -26,25 +26,73 @@ namespace PAIS.Controllers
             newsRepository = nRepo;
         }
 
-        public ViewResult List(string search, int page = 1) =>
-            View(new BooksListViewModel
+        public ViewResult List(string search, string type, int page = 1)
+        {
+            BooksListViewModel books = new BooksListViewModel() { Search = search, Type = type };
+
+            if (search == null && type == null)
             {
-                Books = bookRepository.Books
+                books.Books = bookRepository.Books
                      .OrderBy(b => b.BookID)
-                     .Where(b => search == null || b.Name.ToLower().Contains(search.ToLower()))
                      .Skip((page - 1) * PageSize)
-                     .Take(PageSize),
-                PagingInfo = new PagingInfo
+                     .Take(PageSize);
+                books.PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = search == null ?
-                        bookRepository.Books.Count() :
-                        bookRepository.Books.Where(e =>
+                    TotalItems = bookRepository.Books.Count()
+                };
+            }
+            else if (type == null)
+            {
+                books.Books = bookRepository.Books
+                     .OrderBy(b => b.BookID)
+                     .Where(b => b.Name.ToLower().Contains(search.ToLower()))
+                     .Skip((page - 1) * PageSize)
+                     .Take(PageSize);
+                books.PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = bookRepository.Books.Where(e =>
                         e.Name.ToLower().Contains(search.ToLower())).Count()
-                },
-                Search = search
-            });
+                };
+            }
+            else if (search == null)
+            {
+                books.Books = bookRepository.Books
+                     .OrderBy(b => b.BookID)
+                     .Where(b => b.PublicationType == type)
+                     .Skip((page - 1) * PageSize)
+                     .Take(PageSize);
+                books.PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = bookRepository.Books.Where(b =>
+                        b.PublicationType == type).Count()
+                };
+            }
+            else
+            {
+                books.Books = bookRepository.Books
+                     .OrderBy(b => b.BookID)
+                     .Where(b => b.PublicationType == type && 
+                        b.Name.ToLower().Contains(search.ToLower()))
+                     .Skip((page - 1) * PageSize)
+                     .Take(PageSize);
+                books.PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = bookRepository.Books.Where(b =>
+                        b.PublicationType == type &&
+                        b.Name.ToLower().Contains(search.ToLower())).Count()
+                };
+            }
+
+            return View(books);
+         }
 
         public ViewResult About() =>
             View();

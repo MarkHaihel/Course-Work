@@ -4,7 +4,7 @@
     <div class="d-flex flex-column">
         <img class="mx-auto p-2" style="width:200px; height:280px;" alt="@Model.Name" src="data:image/jpeg;base64,@(Convert.ToBase64String(@Model.Image))" />
     </div>
-    <div class="bg-faded" style="height:60px;">
+    <div class="bg-faded" style="height:70px;">
         <p class="text-center">
             <a class="text-decoration-none" asp-controller="Home" asp-action="Details" asp-route-bookId="@Model.BookID">@Model.Name</a>
         </p>

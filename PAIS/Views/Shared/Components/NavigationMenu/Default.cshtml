@@ -1,0 +1,15 @@
+﻿@model IEnumerable<string>
+
+<h4>Тип публікації</h4>
+<hr />  
+
+@foreach (string type in Model)
+{
+    <a class="btn btn-block
+       @(type == ViewBag.SelectedType ? "btn-primary": "btn-outline-primary")"
+       asp-controller="Home"
+       asp-route-type="@type"
+       asp-route-page="1">
+        @type
+    </a>
+}
