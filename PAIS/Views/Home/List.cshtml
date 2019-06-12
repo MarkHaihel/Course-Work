@@ -20,7 +20,7 @@
                                              up="@Model.BooksSortVM.Up"
                                              current="@Model.BooksSortVM.Current"
                                              property="@Model.BooksSortVM.NameSort">
-                                    Name
+                                    Назва
                                 </sort-header>
 
                             </th>
@@ -29,7 +29,7 @@
                                              up="@Model.BooksSortVM.Up"
                                              current="@Model.BooksSortVM.Current"
                                              property="@Model.BooksSortVM.YearSort">
-                                    Year
+                                    Рік
                                 </sort-header>
 
                             </th>
@@ -38,7 +38,7 @@
                                              up="@Model.BooksSortVM.Up"
                                              current="@Model.BooksSortVM.Current"
                                              property="@Model.BooksSortVM.RateSort">
-                                    Rate
+                                    Рейтинг
                                 </sort-header>
 
                             </th>
@@ -47,7 +47,7 @@
                                              up="@Model.BooksSortVM.Up"
                                              current="@Model.BooksSortVM.Current"
                                              property="@Model.BooksSortVM.PriceSort">
-                                    Price
+                                    Ціна
                                 </sort-header>
 
                             </th>
@@ -64,7 +64,7 @@
                     <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
                          page-class="btn" page-class-normal="btn-secondary" page-url-type="@Model.Type"
                          page-class-selected="btn-primary" page-url-search="@Model.Search"
-                         page-url-sortOrder="@(Model.BooksSortVM.Current)"
+                         page-url-sortOrder="@Model.BooksSortVM.Current"
                          class="btn-group pull-right m-1 mr-4">
                     </div>
                 </div>
