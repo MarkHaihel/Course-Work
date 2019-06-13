@@ -10,50 +10,49 @@
     <h2 class="p-1">Видання</h2>
     <hr />
     
-    <div>
-        <div class="row">
-            <div class="col-sm-12 order-lg-1 order-2 col-lg-9 border row p-0 mt-3">
-                <table class="table border">
-                        <tr class="text-center">
-                            <th>
-                                <sort-header action="List"
-                                             up="@Model.BooksSortVM.Up"
-                                             current="@Model.BooksSortVM.Current"
-                                             property="@Model.BooksSortVM.NameSort">
-                                    Назва
-                                </sort-header>
+        <div class="row m-0">
+            <div class="col-sm-12 order-lg-1 order-2 col-lg-9 row p-0 pt-4 m-0">
+                <div class="pl-4 pr-4 col-12">
+                    <div class="row col-12 m-0 p-0 border">
+                        <div class="col text-center">
+                            <sort-header action="List"
+                                         up="@Model.BooksSortVM.Up"
+                                         current="@Model.BooksSortVM.Current"
+                                         property="@Model.BooksSortVM.NameSort">
+                                Назва
+                            </sort-header>
 
-                            </th>
-                            <th>
-                                <sort-header action="List"
-                                             up="@Model.BooksSortVM.Up"
-                                             current="@Model.BooksSortVM.Current"
-                                             property="@Model.BooksSortVM.YearSort">
-                                    Рік
-                                </sort-header>
+                        </div>
+                        <div class="col text-center">
+                            <sort-header action="List"
+                                         up="@Model.BooksSortVM.Up"
+                                         current="@Model.BooksSortVM.Current"
+                                         property="@Model.BooksSortVM.YearSort">
+                                Рік
+                            </sort-header>
 
-                            </th>
-                            <th>
-                                <sort-header action="List"
-                                             up="@Model.BooksSortVM.Up"
-                                             current="@Model.BooksSortVM.Current"
-                                             property="@Model.BooksSortVM.RateSort">
-                                    Рейтинг
-                                </sort-header>
+                        </div>
+                        <div class="col text-center">
+                            <sort-header action="List"
+                                         up="@Model.BooksSortVM.Up"
+                                         current="@Model.BooksSortVM.Current"
+                                         property="@Model.BooksSortVM.RateSort">
+                                Рейтинг
+                            </sort-header>
 
-                            </th>
-                            <th>
-                                <sort-header action="List"
-                                             up="@Model.BooksSortVM.Up"
-                                             current="@Model.BooksSortVM.Current"
-                                             property="@Model.BooksSortVM.PriceSort">
-                                    Ціна
-                                </sort-header>
+                        </div>
+                        <div class="col text-center">
+                            <sort-header action="List"
+                                         up="@Model.BooksSortVM.Up"
+                                         current="@Model.BooksSortVM.Current"
+                                         property="@Model.BooksSortVM.PriceSort">
+                                Ціна
+                            </sort-header>
 
-                            </th>
-                            <th scope="col"></th>
-                        </tr>
-                </table>
+                        </div>
+                        <div scope="col text-center"></div>
+                    </div>
+                </div>
                 @foreach (Book b in Model.Books)
                 {
                     <div class="col-md-6 col-lg-4">
@@ -69,11 +68,10 @@
                     </div>
                 </div>
             </div>
-            <div id="type" class="col-sm-12 order-lg-2 order-1 col-lg-3 pt-4 card  mt-3">
+            <div id="type" class="col-sm-12 order-lg-2 order-1 col-lg-3 pt-4">
                 @await Component.InvokeAsync("NavigationMenu")
             </div>
         </div>
-    </div>
 }
 else if (Model.Search != null)
 {

@@ -15,7 +15,7 @@ namespace PAIS.Controllers
         private IRateRepository rateRepository;
         private ICommentRepository commentRepository;
         private INewsRepository newsRepository;
-        public int PageSize = 3;
+        public int PageSize = 6;
 
         public HomeController(IBookRepository bRepo, ICommentRepository cRepo, IRateRepository rRepo
             , INewsRepository nRepo)
@@ -96,13 +96,13 @@ namespace PAIS.Controllers
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
                     TotalItems = bookRepository.Books.Where(b =>
-                        b.PublicationType == type).Count()
+                        b.PublicationType.ToLower().Contains(type.ToLower())).Count()
                 };
             }
             else
             {
                 viewModel.Books = viewModel.Books
-                     .Where(b => b.PublicationType == type && 
+                     .Where(b => b.PublicationType == type &&
                         b.Name.ToLower().Contains(search.ToLower()))
                      .Skip((page - 1) * PageSize)
                      .Take(PageSize);

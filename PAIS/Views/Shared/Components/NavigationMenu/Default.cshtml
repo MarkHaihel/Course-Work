@@ -3,12 +3,14 @@
 <h4>Тип публікації</h4>
 <hr />  
 
-<a class="btn btn-block btn-outline-dark"
+<a class="btn btn-block btn-primary"
    asp-action="List"
    asp-controller="Home"
    asp-route-type="">
     Всі книги
 </a>
+
+<hr />
 
 @foreach (string type in Model)
 {
@@ -16,6 +18,7 @@
        @(type == ViewBag.SelectedType ? "btn-primary": "btn-outline-primary")"
        asp-controller="Home"
        asp-route-type="@type"
+       asp-route-search=""
        asp-route-page="1">
         @type
     </a>

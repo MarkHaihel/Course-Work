@@ -20,7 +20,7 @@
        <div>
             <label asp-for="Image">Зображення</label>
             <div><span asp-validation-for="Image" class="text-danger"></span></div>
-            <input type="file" asp-for="Image" class="form-control-file border"/>
+            <input type="file" asp-for="Image" class="form-control-file border" required/>
         </div>
         <div class="form-group">
             <label asp-for="Description">Опис</label>
