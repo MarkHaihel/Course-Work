@@ -42,7 +42,7 @@
         </tr>
     </thead>
     <tbody>
-        @{ int i = 0;}
+        @{ int i = 0; }
         @foreach (var user in Model)
         {
             bool isBlocked = blockedUserRepository.BlockedUsers.Where(b => b.UserId == user.Id).Any();
