@@ -165,6 +165,14 @@ namespace PAIS.Controllers
             View(newsRepository.GetNews(newsID));
 
         [Authorize]
+        [HttpGet]
+        public IActionResult AddComment() => RedirectToAction("List");
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult RateBook() => RedirectToAction("List");
+
+        [Authorize]
         [HttpPost]
         public IActionResult AddComment(Comment comment)
         {

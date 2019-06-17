@@ -1,7 +1,7 @@
 ﻿@model NewsListViewModel
 
 @{
-    ViewBag.Title = "Видання";
+    ViewBag.Title = "Новини";
     Layout = "_Layout";
 }
 
@@ -58,7 +58,7 @@
             <hr />
             @foreach (News n in Model.NewsRepo.AsQueryable()
    .OrderBy(n => n.Date)
-   .Skip(Math.Max(0, Model.NewsRepo.AsQueryable().Count() - 5)))
+   .Skip(Math.Max(0, Model.NewsRepo.AsQueryable().Count() - 3)))
             {
                 <div>
                     <a asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@n.NewsID">

@@ -2,7 +2,7 @@
 using PAIS.Models;
 using PAIS.Models.ViewModels;
 using System.Linq;
-using System.IO;
+using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 
@@ -44,7 +44,7 @@ namespace PAIS.Controllers
             }
         }
 
-        public ViewResult Create() => View("Edit", new News());
+        public ViewResult Create() => View("Edit", new News() { Date = DateTime.Now });
 
         [HttpPost]
         public IActionResult Delete(int newsID)

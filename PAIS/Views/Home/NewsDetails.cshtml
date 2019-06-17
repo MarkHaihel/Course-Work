@@ -1,11 +1,16 @@
 ﻿@model News
 
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "_Layout";
+}
+
 @inject INewsRepository newsRepository
 
 <h2 class="p-1">Новини</h2>
 <hr />
 <div class="row">
-    <div class="col-lg-8 order-lg-1">
+    <div class="col-lg-8 order-lg-1 order-2 mt-3">
         <div class="card card-outline-primary p-2 ">
             <div>
                 <h3>@Model.Name</h3>
@@ -20,57 +25,59 @@
             </a>
         </div>
     </div>
-    <div class="col-lg-4 order-lg-2 card p-3">
-        <div>
-            <h4>
-                <span>Пошук</span>
-            </h4>
-        </div>
-        <hr />
-        <div>
-            <form asp-controller="Home" asp-action="NewsList" method="get">
-                <div class="row pr-4 pl-3">
-                    <div class="col-lg-11 p-0">
-                        <input type="text" aria-label="Search" class="form-control border-primary w-100 my-0" name="search" placeholder="Пошук новини">
+    <div class=" p-3 col-lg-4 order-lg-2 order-1">
+        <div class="p-3 card">
+            <div>
+                <h4>
+                    <span>Пошук</span>
+                </h4>
+            </div>
+            <hr />
+            <div>
+                <form asp-controller="Home" asp-action="NewsList" method="get">
+                    <div class="row pr-4 pl-3">
+                        <div class="col-11 p-0">
+                            <input type="text" aria-label="Search" class="form-control border-primary w-100 my-0" name="search" placeholder="Пошук новини">
+                        </div>
+                        <div class="col-1 p-0">
+                            <button type="submit" class="btn btn-primary my-0"><i class="fa fa-search"></i></button>
+                        </div>
                     </div>
-                    <div class="col-lg-1 p-0">
-                        <button type="submit" class="btn btn-primary my-0"><i class="fa fa-search"></i></button>
-                    </div>
+                </form>
+            </div>
+            <hr />
+            <div>
+                <h4>
+                    <span>Популярні</span>
+                </h4>
+            </div>
+            <hr />
+            @foreach (News n in newsRepository.NewsRepo.AsQueryable()
+    .OrderByDescending(n => n.Count)
+    .Skip(Math.Max(0, newsRepository.NewsRepo.AsQueryable().Count() - 3)))
+            {
+                <div>
+                    <a asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@n.NewsID">
+                        @n.Name
+                    </a>
+                    <p class="small">@n.Date.ToString("MM/dd/yyyy") @n.Author</p>
                 </div>
-            </form>
-        </div>
-        <hr />
-        <div>
-            <h4>
-                <span>Популярні</span>
-            </h4>
-        </div>
-        <hr />
-        @foreach (News n in newsRepository.NewsRepo.AsQueryable()
-  .OrderByDescending(n => n.Count)
-  .Skip(Math.Max(0, newsRepository.NewsRepo.AsQueryable().Count() - 3)))
-        {
-            <div>
-                <a asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@n.NewsID">
-                    @n.Name
-                </a>
-                <p class="small">@n.Date.ToString("MM/dd/yyyy") @n.Author</p>
-            </div>
-        }
+            }
 
-        <hr />
-        <h4>
-            <span>Останні</span>
-        </h4>
-        <hr />
-        @foreach (News n in newsRepository.LastNews())
-        {
-            <div>
-                <a asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@n.NewsID">
-                    @n.Name
-                </a>
-                <p class="small">@n.Date.ToString("MM/dd/yyyy") @n.Author</p>
-            </div>
-        }
+            <hr />
+            <h4>
+                <span>Останні</span>
+            </h4>
+            <hr />
+            @foreach (News n in newsRepository.LastNews())
+            {
+                <div>
+                    <a asp-controller="Home" asp-action="NewsDetails" asp-route-newsID="@n.NewsID">
+                        @n.Name
+                    </a>
+                    <p class="small">@n.Date.ToString("MM/dd/yyyy") @n.Author</p>
+                </div>
+            }
+        </div>
     </div>
 </div>
