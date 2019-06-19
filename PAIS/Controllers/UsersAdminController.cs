@@ -177,7 +177,6 @@ namespace PAIS.Controllers
             string id = blockedUserRepository.BlockedUsers.First(u => u.UserId == UserId).UserId;
             blockedUserRepository.DeleteBlockedUser(id);
 
-            TempData["message"] = $"Користувач з ID: {id} був розблокований";
             return RedirectToAction("Index");
         }
 
